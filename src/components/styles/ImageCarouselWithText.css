@@ -1,0 +1,201 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: #000; /* fallback background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  
+  .carousel-text {
+    height: 20%;
+    background-color: rgb(202, 161, 57);
+    color: #fff;
+  
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Navigation Arrows */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .carousel-container:hover .carousel-arrow {
+    opacity: 1;
+  }
+  
+  .carousel-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .carousel-arrow:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+  
+  .carousel-arrow-left {
+    left: 20px;
+  }
+  
+  .carousel-arrow-right {
+    right: 20px;
+  }
+  
+  /* Dots */
+  .carousel-dots {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+  }
+  
+  .carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+  }
+  
+  .carousel-dot.active {
+    background-color: white;
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* Progress Bar */
+  .carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+  }
+  
+  .carousel-progress-inner {
+    height: 100%;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    width: 0;
+    transition: width 0.3s linear;
+  }
+  
+  .carousel-container:not(:hover) .carousel-progress-inner {
+    animation: slideProgress linear forwards;
+  }
+  
+  /* Empty state */
+  .carousel-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #111;
+    color: #ccc;
+    font-size: 1.5rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .carousel-caption {
+      font-size: 1rem;
+      padding: 15px;
+    }
+  
+    .carousel-text {
+      font-size: 1rem;
+      padding: 15px;
+    }
+  
+    .carousel-arrow {
+      width: 36px;
+      height: 36px;
+    }
+  
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+    }
+  
+    .carousel-dot.active {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  
+  /* Progress animation */
+  @keyframes slideProgress {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
