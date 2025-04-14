@@ -36,7 +36,7 @@ export default function Footer() {
               <li><a href="/"><span className="footer-list-dot"></span>Health</a></li>
               <li><a href="/"><span className="footer-list-dot"></span>Empowerment</a></li>
               <li><a href="/"><span className="footer-list-dot"></span>Social</a></li>
-               </ul>
+            </ul>
           </div>
           
           <div className="footer-column">
@@ -48,17 +48,15 @@ export default function Footer() {
               <li><a href="/"><span className="footer-list-dot"></span>Donate Skill</a></li>
               <li><a href="/"><span className="footer-list-dot"></span>Email / Call / Query</a></li>
             </ul>
-            
-           
           </div>
-             
+              
           <div className="footer-column">
             <h3 className="footer-heading">Contact</h3>
             <div className="footer-contact-info">
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
                 <p>
-                  Sewa Bharti Delhi,Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
+                  Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
                 </p>
               </div>
               
@@ -77,7 +75,7 @@ export default function Footer() {
             
             {/* Social links */}
             <div className="footer-social">
-             <div className="footer-social-icons">
+              <div className="footer-social-icons">
                 <a href="/" aria-label="Facebook" className="footer-social-icon">
                   <Facebook size={20} />
                 </a>
@@ -96,13 +94,10 @@ export default function Footer() {
         </div>
       </div>
       
-     
-      
       {/* Bottom section with copyright, policy links, etc. */}
       <div className="footer-bottom">
         <div className="footer-bottom-container">
           <p className="footer-copyright">© {currentYear} Sewa Bharti. All rights reserved.</p>
-         
           <div className="footer-bottom-links">
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms & Conditions</a>
@@ -110,6 +105,11 @@ export default function Footer() {
             <a href="/accessibility">Accessibility</a>
           </div>
         </div>
+      </div>
+
+      {/* Additional credit line */}
+      <div className="footer-credit">
+        <p>Developed by Team Bludgers</p>
       </div>
     </footer>
   );
