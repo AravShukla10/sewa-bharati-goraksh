@@ -1,7 +1,15 @@
 import React from 'react';
 import './styles/SewaBhartiSections.css';
+// Import your images (adjust the paths according to your project structure)
+import educationImg from '../images/11.webp';
+import healthImg from '../images/12.webp';
+import selfRelianceImg from '../images/13.webp';
+import socialImg from '../images/14.webp';
 
 const SewaBhartiSections = ({ languageType }) => {
+  // Array of images corresponding to each sector
+  const sectorImages = [educationImg, healthImg, selfRelianceImg, socialImg];
+
   const content = {
     en: [
       { heading: 'Education ', description: 'Sewa Bharti is dedicated to providing quality education in underserved areas, ensuring every child has the opportunity to learn and grow.' },
@@ -23,7 +31,7 @@ const SewaBhartiSections = ({ languageType }) => {
         <div key={index} className="sector">
           <div className="sector__image-wrapper">
             <img 
-              src={`https://picsum.photos/200/200?random=${index + 1}`} 
+              src={sectorImages[index]} 
               alt={sector.heading} 
               className="sector__image"
             />
