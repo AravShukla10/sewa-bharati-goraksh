@@ -103,7 +103,7 @@
   /* Dots */
   .carousel-dots {
     position: absolute;
-    bottom: 25px;
+    bottom: 18px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
