@@ -34,7 +34,7 @@ const slides = [
   },
   {
     en: {
-      title: "Himachal Flood Relief",
+      title: "",
       subtitle: "Providing immediate assistance to those in need",
       paragraphs: [
         "In the disaster caused by cloudburst in Himachal Pradesh, Seva Bharati is providing immediate relief to victims rendered homeless.",
@@ -48,7 +48,7 @@ const slides = [
       image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     },
     hi: {
-      title: "हिमाचल बाढ़ राहत",
+      title: "",
       subtitle: "जरूरतमंदों को तत्काल सहायता प्रदान करना",
       paragraphs: [
         "हिमाचल प्रदेश में बादल फटने से हुई आपदा में, सेवा भारती बेघर हुए पीड़ितों को तत्काल राहत प्रदान कर रही है।",

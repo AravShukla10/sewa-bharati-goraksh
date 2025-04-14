@@ -243,7 +243,7 @@
 
 /* Bottom section */
 .footer-bottom {
-  background-color:  #022467;
+  background-color:  #0A3153;
   padding: 1.5rem;
   /* Remove any bottom margin and padding */
   margin: 0; /* Changed from margin-bottom to remove all margins */
@@ -294,7 +294,7 @@
 .footer-credit {
   text-align: center;
   padding: 1rem 0;
-  background-color: #022467; /* or adjust background color */
+  background-color: #0A3153; /* or adjust background color */
   color: #fff;
   font-size: 0.9rem;
 }
@@ -305,7 +305,7 @@
 
 /* Gradient background */
 footer {
-  background: linear-gradient(to right, #02308d, #02308d);
+  background: linear-gradient(to right, #0A3153, #0A3153);
   /* Ensure no margin or padding at the bottom */
   margin: 0; /* Changed from margin-bottom to remove all margins */
   padding: 0; /* Changed from padding-bottom to remove all padding */
