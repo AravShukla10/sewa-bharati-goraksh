@@ -34,7 +34,7 @@ const slides = [
   },
   {
     en: {
-      title: "Himachal Flood Relief",
+      title: "",
       subtitle: "Providing immediate assistance to those in need",
       paragraphs: [
         "In the disaster caused by cloudburst in Himachal Pradesh, Seva Bharati is providing immediate relief to victims rendered homeless.",
@@ -48,7 +48,7 @@ const slides = [
       image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     },
     hi: {
-      title: "हिमाचल बाढ़ राहत",
+      title: "",
       subtitle: "जरूरतमंदों को तत्काल सहायता प्रदान करना",
       paragraphs: [
         "हिमाचल प्रदेश में बादल फटने से हुई आपदा में, सेवा भारती बेघर हुए पीड़ितों को तत्काल राहत प्रदान कर रही है।",
@@ -64,7 +64,7 @@ const slides = [
   },
   {
     en: {
-      title: "Community Development",
+      title: "",
       subtitle: "Empowering the underprivileged sections of society",
       paragraphs: [
         "Sewa Bharati is committed to holistic development through education, healthcare, and skill development programs.",
@@ -78,7 +78,7 @@ const slides = [
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     },
     hi: {
-      title: "सामुदायिक विकास",
+      title: "",
       subtitle: "समाज के वंचित वर्गों को सशक्त बनाना",
       paragraphs: [
         "सेवा भारती शिक्षा, स्वास्थ्य और कौशल विकास कार्यक्रमों के माध्यम से समग्र विकास के लिए प्रतिबद्ध है।",
