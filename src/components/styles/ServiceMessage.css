@@ -1,81 +1,60 @@
 .service-message {
     padding: 2rem;
-    background: #f7f7f7;
+    text-align: justify;
   }
   
-  .hero-section {
-     background-size: cover;
-    padding: 3rem 2rem;
-    color: white;
+  .heading-section {
     text-align: center;
-    border-radius: 10px;
+    margin-bottom: 1.5rem;
   }
   
-  .hero-section h1 {
+  .heading-section h1 {
     font-size: 2.5rem;
     font-weight: bold;
-  }
-  
-  .hero-section p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-top: 1rem;
-  }
-  
-  .service-content {
-    margin-top: 3rem;
-    padding: 1rem 0;
-    text-align: center;
+    margin-bottom: 1rem;
   }
   
   .service-content p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
   }
   
   .service-categories {
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
     margin-top: 3rem;
     flex-wrap: wrap;
   }
   
-  .category-card {
-    background: white;
-    padding: 2rem;
-    text-align: center;
-    width: 30%;
+  .category {
+    background: #fff;
+    padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    border-radius: 8px;
+    width: 30%;
+    margin: 1rem 0;
+    text-align: center;
   }
   
-  .category-card h3 {
-    margin-top: 1.5rem;
-    font-size: 1.5rem;
+  .category h3 {
+    font-size: 1.1rem;
     font-weight: bold;
+    margin-bottom: 1rem;
   }
   
-  .category-card p {
-    margin-top: 1rem;
+  .category p {
     font-size: 1rem;
     color: #555;
   }
   
-  .category-icon {
-    background-color: #3e8e41;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-  }
+  @media (max-width: 768px) {
+    .service-categories {
+      flex-direction: column;
+    }
   
-  .category-icon .icon {
-    color: white;
-    font-size: 2rem;
+    .category {
+      width: 100%;
+    }
   }
   

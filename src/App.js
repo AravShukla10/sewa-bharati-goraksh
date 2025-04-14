@@ -47,8 +47,14 @@ function App() {
   return (
     <div className="App">
       <Navbar languageType={languageType} setLanguageType={setLanguageType} />
+      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
+      </h2>
       <SewaBhartiSections languageType={languageType} />
       <ServiceMessage languageType={languageType} />
+      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
+      </h2>
       <CarouselWithText
         images={imageArray1}
         position="left"
