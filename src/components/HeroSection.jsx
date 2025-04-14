@@ -1,39 +1,235 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/HeroSection.css';
-
-const HeroSection = ({ languageType }) => {
-  const content = {
+const slides = [
+  {
     en: {
       title: "Sewa Bharati Goraksh",
       subtitle: "Serving with dedication, compassion, and trust",
-      paragraph1: "Rashtriya Swayamsevak Sangh is working towards bringing the nation to the pinnacle of glory by uniting the entire Hindu society, but still the deprived, afflicted, neglected and deprived sections of the Hindu society are far away from us. Anti-national forces use them as their weapon.",
-      paragraph2: "With this in mind, the Sangh has created Seva Vibhag and Seva Bharti and is working to bring them closer to itself through service and connect them with the mainstream of the nation.",
-      paragraph3: "Sewa Bharti is a service organization run by volunteers. Sewa Bharti exclusively works in the place of Sewa Basti where the deprived, suffering, neglected, poor and economically backward society lives.",
-      cta: "Join Our Mission"
+      paragraphs: [
+        "Rashtriya Swayamsevak Sangh is working towards bringing the nation to the pinnacle of glory by uniting the entire Hindu society.",
+        {
+          quote: "Service to humanity is service to divinity",
+          regular: "With this vision, the Sangh has created Seva Vibhag and Seva Bharti to bring people closer through service."
+        },
+        "Sewa Bharti is a service organization run by volunteers, working exclusively in Sewa Bastis where the deprived and neglected communities live."
+      ],
+      cta: "Join Our Mission",
+      image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     },
     hi: {
       title: "सेवा भारती गोरक्ष",
       subtitle: "समर्पण, करुणा और विश्वास के साथ सेवा",
-      paragraph1: "राष्ट्रीय स्वयंसेवक संघ संपूर्ण हिंदू समाज को एकजुट करके राष्ट्र को गौरव के शिखर पर पहुंचाने की दिशा में कार्य कर रहा है, परन्तु अभी भी हिंदू समाज के वंचित, पीड़ित, उपेक्षित और वंचित वर्ग हमसे दूर हैं। राष्ट्र विरोधी शक्तियां उन्हें अपने हथियार के रूप में उपयोग करती हैं।",
-      paragraph2: "इसी को ध्यान में रखते हुए संघ ने सेवा विभाग और सेवा भारती का निर्माण किया है और सेवा के माध्यम से उन्हें अपने करीब लाने और राष्ट्र की मुख्यधारा से जोड़ने का कार्य कर रहा है।",
-      paragraph3: "सेवा भारती स्वयंसेवकों द्वारा संचालित एक सेवा संगठन है। सेवा भारती विशेष रूप से सेवा बस्ती में कार्य करती है जहां वंचित, पीड़ित, उपेक्षित, गरीब और आर्थिक रूप से पिछड़ा समाज रहता है।",
-      cta: "हमारे मिशन से जुड़ें"
+      paragraphs: [
+        "राष्ट्रीय स्वयंसेवक संघ संपूर्ण हिंदू समाज को एकजुट करके राष्ट्र को गौरव के शिखर पर पहुंचाने की दिशा में कार्य कर रहा है।",
+        {
+          quote: "मानवता की सेवा ही दिव्यता की सेवा है",
+          regular: "इसी दृष्टि से संघ ने सेवा विभाग और सेवा भारती का निर्माण किया है जो सेवा के माध्यम से लोगों को करीब लाने का कार्य करते हैं।"
+        },
+        "सेवा भारती स्वयंसेवकों द्वारा संचालित एक सेवा संगठन है जो विशेष रूप से सेवा बस्तियों में कार्य करती है जहां वंचित और उपेक्षित समुदाय रहते हैं।"
+      ],
+      cta: "हमारे मिशन से जुड़ें",
+      image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    }
+  },
+  {
+    en: {
+      title: "Himachal Flood Relief",
+      subtitle: "Providing immediate assistance to those in need",
+      paragraphs: [
+        "In the disaster caused by cloudburst in Himachal Pradesh, Seva Bharati is providing immediate relief to victims rendered homeless.",
+        {
+          quote: "The best way to find yourself is to lose yourself in the service of others",
+          regular: "Our volunteers are delivering food, blankets, and medical assistance to affected families."
+        },
+        "Through relief and rescue operations, RSS and Seva Bharati volunteers are working tirelessly in affected areas."
+      ],
+      cta: "Donate Now",
+      image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    },
+    hi: {
+      title: "हिमाचल बाढ़ राहत",
+      subtitle: "जरूरतमंदों को तत्काल सहायता प्रदान करना",
+      paragraphs: [
+        "हिमाचल प्रदेश में बादल फटने से हुई आपदा में, सेवा भारती बेघर हुए पीड़ितों को तत्काल राहत प्रदान कर रही है।",
+        {
+          quote: "खुद को खोजने का सबसे अच्छा तरीका है दूसरों की सेवा में खुद को खो देना",
+          regular: "हमारे स्वयंसेवक प्रभावित परिवारों को भोजन, कंबल और चिकित्सा सहायता प्रदान कर रहे हैं।"
+        },
+        "राहत और बचाव अभियानों के माध्यम से, आरएसएस और सेवा भारती के स्वयंसेवक प्रभावित क्षेत्रों में अथक परिश्रम कर रहे हैं।"
+      ],
+      cta: "अभी दान करें",
+      image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    }
+  },
+  {
+    en: {
+      title: "Community Development",
+      subtitle: "Empowering the underprivileged sections of society",
+      paragraphs: [
+        "Sewa Bharati is committed to holistic development through education, healthcare, and skill development programs.",
+        {
+          quote: "The hands that serve are holier than the lips that pray",
+          regular: "Our volunteers work in rural and urban slums to provide quality education and healthcare facilities."
+        },
+        "Join us in creating a self-reliant society where every individual has equal opportunities to grow."
+      ],
+      cta: "Volunteer With Us",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    },
+    hi: {
+      title: "सामुदायिक विकास",
+      subtitle: "समाज के वंचित वर्गों को सशक्त बनाना",
+      paragraphs: [
+        "सेवा भारती शिक्षा, स्वास्थ्य और कौशल विकास कार्यक्रमों के माध्यम से समग्र विकास के लिए प्रतिबद्ध है।",
+        {
+          quote: "सेवा करने वाले हाथ प्रार्थना करने वाले होंठों से अधिक पवित्र होते हैं",
+          regular: "हमारे स्वयंसेवक ग्रामीण और शहरी झुग्गी बस्तियों में गुणवत्तापूर्ण शिक्षा और स्वास्थ्य सुविधाएं प्रदान करने का कार्य करते हैं।"
+        },
+        "हमारे साथ जुड़कर एक आत्मनिर्भर समाज के निर्माण में सहयोग करें जहां हर व्यक्ति के पास विकास के समान अवसर हों।"
+      ],
+      cta: "हमारे साथ स्वयंसेवक बनें",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+    }
+  }
+];
+const HeroSection = ({ languageType }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [startX, setStartX] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('right');
+  const sliderRef = useRef(null);
+  const slideTimeoutRef = useRef(null);
+
+  const goToSlide = (index) => {
+    if (index === currentSlide) return;
+    setSlideDirection(index > currentSlide ? 'right' : 'left');
+    setCurrentSlide(index);
+    resetAutoSlide();
+  };
+
+  const goToNextSlide = () => {
+    setSlideDirection('right');
+    setCurrentSlide(prev => (prev + 1) % slides.length);
+    resetAutoSlide();
+  };
+
+  const goToPrevSlide = () => {
+    setSlideDirection('left');
+    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
+    resetAutoSlide();
+  };
+
+  const resetAutoSlide = () => {
+    clearTimeout(slideTimeoutRef.current);
+    slideTimeoutRef.current = setTimeout(() => {
+      if (!isDragging) {
+        goToNextSlide();
+      }
+    }, 8000);
+  };
+
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches ? e.touches[0].clientX : e.clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!startX) return;
+    const currentX = e.touches ? e.touches[0].clientX : e.clientX;
+    const diff = startX - currentX;
+    
+    if (Math.abs(diff)) {
+      e.preventDefault();
     }
   };
 
-  const currentContent = languageType === 'hi' ? content.hi : content.en;
+  const handleTouchEnd = (e) => {
+    if (!startX) return;
+    const currentX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = startX - currentX;
+    
+    if (diff > 50) {
+      goToNextSlide();
+    } else if (diff < -50) {
+      goToPrevSlide();
+    }
+    
+    setStartX(null);
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    resetAutoSlide();
+    return () => clearTimeout(slideTimeoutRef.current);
+  }, [currentSlide, isDragging]);
+
+  const currentContent = languageType === 'hi' ? slides[currentSlide].hi : slides[currentSlide].en;
 
   return (
-    <section className="hero">
-      <div className="hero-content">
-        <h1>{currentContent.title}</h1>
-        <p className="subtitle">{currentContent.subtitle}</p>
-        <div className="mission-text">
-          <p>{currentContent.paragraph1}</p>
-          <p>{currentContent.paragraph2}</p>
-          <p>{currentContent.paragraph3}</p>
+    <section 
+      className="hs-hero-slider"
+      ref={sliderRef}
+      onMouseDown={handleTouchStart}
+      onMouseMove={handleTouchMove}
+      onMouseUp={handleTouchEnd}
+      onMouseLeave={() => setIsDragging(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="hs-slide-container">
+        <div 
+          className={`hs-text-content hs-slide-${slideDirection}`}
+          key={`text-${currentSlide}`}
+        >
+          <div className="hs-content-wrapper">
+            <h1 className="hs-title">{currentContent.title}</h1>
+            <p className="hs-subtitle">{currentContent.subtitle}</p>
+            <div className="hs-mission-text">
+              {currentContent.paragraphs.map((para, index) => {
+                if (typeof para === 'object' && para.quote) {
+                  return (
+                    <div key={index} className="hs-quote-container">
+                      <blockquote className="hs-quote-text">"{para.quote}"</blockquote>
+                      <p className="hs-regular-text">{para.regular}</p>
+                    </div>
+                  );
+                }
+                return <p key={index} className="hs-regular-text">{para}</p>;
+              })}
+            </div>
+            <button className="hs-cta-button">{currentContent.cta}</button>
+          </div>
         </div>
-        <button className="cta-button">{currentContent.cta}</button>
+        
+        <div 
+          className={`hs-image-content hs-slide-${slideDirection}`}
+          style={{ backgroundImage: `url(${currentContent.image})` }}
+          key={`image-${currentSlide}`}
+        >
+          <div className="hs-image-overlay"></div>
+        </div>
+      </div>
+
+      <div className="hs-slider-controls">
+        <button className="hs-slider-prev" onClick={goToPrevSlide} aria-label="Previous slide">
+          &lt;
+        </button>
+        
+        <div className="hs-slider-indicator">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              className={`hs-indicator-dot ${index === currentSlide ? 'hs-active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <button className="hs-slider-next" onClick={goToNextSlide} aria-label="Next slide">
+          &gt;
+        </button>
       </div>
     </section>
   );
