@@ -243,7 +243,7 @@
 
 /* Bottom section */
 .footer-bottom {
-  background-color: #c4480f;
+  background-color: #c4480f92;
   padding: 1.5rem;
   /* Remove any bottom margin and padding */
   margin: 0; /* Changed from margin-bottom to remove all margins */
@@ -294,7 +294,7 @@
 
 /* Gradient background */
 footer {
-  background: linear-gradient(to right, #f26922, #ec5715);
+  background: linear-gradient(to right, #f26722d6, #ec5515cd);
   /* Ensure no margin or padding at the bottom */
   margin: 0; /* Changed from margin-bottom to remove all margins */
   padding: 0; /* Changed from padding-bottom to remove all padding */
