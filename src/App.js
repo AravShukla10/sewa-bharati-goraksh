@@ -15,6 +15,7 @@ import img8 from './images/8.webp';
 import img9 from './images/9.webp';
 import img10 from './images/10.webp';
 import Footer from './components/Footer';
+import HeroSection from './components/HeroSection';
 
 const imageArray1 = [img1, img2, img3, img4, img5];
 const imageArray2 = [img6, img7, img8, img9, img10];
@@ -52,6 +53,7 @@ function App() {
     <div className="App">
       <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
 
+      <HeroSection/>
       
       <CarouselWithText
         images={imageArray1}
