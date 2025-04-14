@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles/HeroSection.css';
+import sevabharti from '../images/sevabharti.webp';
 const slides = [
   {
     en: {
@@ -14,7 +15,7 @@ const slides = [
         "Sewa Bharti is a service organization run by volunteers, working exclusively in Sewa Bastis where the deprived and neglected communities live."
       ],
       cta: "Join Our Mission",
-      image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: sevabharti,
     },
     hi: {
       title: "सेवा भारती गोरक्ष",
