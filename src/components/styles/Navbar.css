@@ -13,12 +13,11 @@
 
 .navbar {
   position: fixed;
-  top: var(--spacer);
-  left: var(--spacer);
-  right: var(--spacer);
-  background: #fff;
-  border-radius: var(--borderRadius);
-  padding: 0 var(--spacer);
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  border-radius: 0;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
   z-index: 1000;
   display: flex;
@@ -26,7 +25,9 @@
   align-items: center;
   min-height: var(--linkHeight);
   flex-wrap: nowrap;
+  background: #fff;
 }
+
 
 .navbar__menu {
   display: flex;
