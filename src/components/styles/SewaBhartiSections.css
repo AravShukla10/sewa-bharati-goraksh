@@ -4,6 +4,9 @@
     gap: 2rem;
     justify-content: space-evenly;
     padding: 2rem;
+    position: relative;
+
+   
   }
   
   .sector {
