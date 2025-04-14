@@ -47,8 +47,9 @@
   
   .carousel-text {
     height: 20%;
+    background-color: rgb(202, 161, 57);
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
+  
     font-size: 1.2rem;
     display: flex;
     align-items: center;

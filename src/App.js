@@ -14,6 +14,9 @@ import img7 from './images/7.webp';
 import img8 from './images/8.webp';
 import img9 from './images/9.webp';
 import img10 from './images/10.webp';
+import nutrition from './images/nutrition.webp';
+import disastermanagment from './images/disastermanagment.webp';
+import adolscentdevelopment from './images/adolscentdevelopment.webp';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
 
@@ -42,11 +45,6 @@ const content2 = {
     description: 'सेवा भारती, गोरक्ष प्रांत, समाज के अनुसूचित जाति/जनजाति के छात्रों के उत्थान और सशक्तिकरण के लिए प्रतिबद्ध है। हमारा लक्ष्य उनकी क्षमता को जागृत करना और उन्हें आत्मनिर्भर और स्वाभिमानी नागरिक बनने के लिए आवश्यक कौशल और संसाधन प्रदान करना है। हमें सर्वश्रेष्ठ और प्रतिभाशाली लड़के और लड़कियों को खोजने और प्रशिक्षित करने की जिम्मेदारी लेने पर गर्व है जो हमारे देश के भविष्य के लिए पथप्रदर्शक बनेंगे। इसी क्रम में, सेवा भारती, गोरक्ष प्रांत ने 2016 से उत्तर प्रदेश के आर्यमगढ़ (आजमगढ़) के तरवां में एक छात्रावास शुरू किया है।',
   },
 };
-const images = [
-  'img1.jpg',
-  'img2.jpg',
-  'img3.jpg'
-];
 
 const campaignTexts = {
   en: [
@@ -62,9 +60,9 @@ const campaignTexts = {
 };
 
 const campaignImages = [
-  'img1.jpg',
-  'img2.jpg',
-  'img3.jpg'
+ adolscentdevelopment,
+  nutrition,
+ disastermanagment
 ];
 
 function App() {
