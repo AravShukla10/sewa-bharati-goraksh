@@ -1,0 +1,41 @@
+.sewa-bharti-sectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-evenly;
+    padding: 2rem;
+  }
+  
+  .sector {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sector:hover {
+    transform: scale(1.05);
+  }
+  
+  .sector__image {
+    width: 80%;
+    height: 40%;
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .sector h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .sector p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  

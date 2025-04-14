@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import CarouselWithText from './components/CarouselWithText';
-
+import SewaBhartiSections from './components/SewaBhartiSections'; // Import the new component
+import ServiceMessage from './components/ServiceMessage';
 import img1 from './images/1.webp';
 import img2 from './images/2.webp';
 import img3 from './images/3.webp';
@@ -13,13 +14,15 @@ import img7 from './images/7.webp';
 import img8 from './images/8.webp';
 import img9 from './images/9.webp';
 import img10 from './images/10.webp';
+import Footer from './components/Footer';
+import HeroSection from './components/HeroSection';
 
 const imageArray1 = [img1, img2, img3, img4, img5];
 const imageArray2 = [img6, img7, img8, img9, img10];
 
 const content1 = {
   en: {
-    title: '	Bal Sanskar Kendra',
+    title: 'Bal Sanskar Kendra',
     description: 'Bal Sanskar Learning Centers are being operated in sewa basti with the motto of “Learn by Playing” for those children whose parents are engaged in daily wedges work (majdoori)  and they are generally used to collect waste plastic from dustbins or just wandering here or there. In the absence of adequate resources and proper guidance, these children may get involved in criminal activities. At Bal Sanskar Kendra, these children are getting educated with sanskar  These students learn about their study course in a play environment. Prarthana & Yogasan are also conducted on a daily basis. They are teaches for good services like cleanliness, health, society welfare and National devotion',
   },
   hi: {
@@ -40,23 +43,24 @@ const content2 = {
 };
 
 function App() {
-  const [languageType, setLanguageType] = useState('en'); 
-
-  const toggleLanguage = () => {
-    setLanguageType(languageType === 'en' ? 'hi' : 'en'); 
-  };
+  const [languageType, setLanguageType] = useState('en');
 
   return (
     <div className="App">
       <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
-      <button 
-        onClick={toggleLanguage} 
-        style={{ margin: '20px', padding: '10px', fontSize: '16px' }}
-      >
-        Switch to {languageType === 'en' ? 'Hindi' : 'English'}
-      </button>
 
+      <HeroSection languageType={languageType} />
       
+      <Navbar languageType={languageType} setLanguageType={setLanguageType} />
+      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+      {languageType === 'hi' ? 'सेवा भारती के प्रमुख आयाम' : 'Sewa Bharti Sectors'}
+
+      </h2>
+      <SewaBhartiSections languageType={languageType} />
+      <ServiceMessage languageType={languageType} />
+      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+          {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
+      </h2>
       <CarouselWithText
         images={imageArray1}
         position="left"
@@ -69,6 +73,9 @@ function App() {
         content={content2}
         languageType={languageType}
       />
+      {/* Adding the new section */}
+    
+      <Footer />
     </div>
   );
 }
