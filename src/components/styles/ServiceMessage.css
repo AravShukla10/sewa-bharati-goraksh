@@ -84,13 +84,15 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(2px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+
+  
 }
 
 .category::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
 
@@ -120,6 +122,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 auto 1.5rem;
+  filter: brightness(1.2) contrast(1.5);
+  
 }
 
 .category h3 {
@@ -138,14 +142,17 @@
 
 .category-1 {
   background-image: url('../../images/15.webp');
+  opacity: 0.7;
 }
 
 .category-2 {
   background-image: url('../../images/16.webp');
+  opacity: 0.7;
 }
 
 .category-3 {
   background-image: url('../../images/17.webp');
+  opacity: 0.7;
 }
 
 @media (max-width: 992px) {
