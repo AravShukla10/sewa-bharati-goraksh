@@ -31,24 +31,28 @@ const ServiceMessage = ({ languageType }) => {
 
   return (
     <div className="service-message">
-      <div className="heading-section">
-        <h1>{content[languageType].heading}</h1>
-      </div>
+      <div className="content-wrapper">
+        <div className="heading-section">
+          <h1>{content[languageType].heading}</h1>
+          <div className="decorative-line"></div>
+        </div>
 
-      <div className="service-content">
-        <p>{content[languageType].paragraph1}</p>
-        <p>{content[languageType].paragraph2}</p>
-        <p>{content[languageType].paragraph3}</p>
-        <p>{content[languageType].paragraph4}</p>
-      </div>
+        <div className="service-content">
+          <p>{content[languageType].paragraph1}</p>
+          <p>{content[languageType].paragraph2}</p>
+          <p>{content[languageType].paragraph3}</p>
+          <p>{content[languageType].paragraph4}</p>
+        </div>
 
-      <div className="service-categories">
-        {content[languageType].categories.map((category, index) => (
-          <div className="category" key={index}>
-            <h3>{category.title}</h3>
-            <p>{category.description}</p>
-          </div>
-        ))}
+        <div className="service-categories">
+          {content[languageType].categories.map((category, index) => (
+            <div className="category" key={index}>
+              <div className="category-icon">{index + 1}</div>
+              <h3>{category.title}</h3>
+              <p>{category.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

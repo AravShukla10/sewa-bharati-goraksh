@@ -53,7 +53,8 @@ function App() {
       
       <Navbar languageType={languageType} setLanguageType={setLanguageType} />
       <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-          {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
+      {languageType === 'hi' ? 'सेवा भारती के प्रमुख आयाम' : 'Sewa Bharti Sectors'}
+
       </h2>
       <SewaBhartiSections languageType={languageType} />
       <ServiceMessage languageType={languageType} />
