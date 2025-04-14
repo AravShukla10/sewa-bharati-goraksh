@@ -2,26 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
-    let interval;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setCurrentIndex((prevIndex) =>
-          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [images.length, isPlaying]);
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 1000); // Change image every 1 second
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [images.length]);
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
-  };
-
-  const togglePlay = () => {
-    setIsPlaying((prev) => !prev);
   };
 
   if (!images || images.length === 0) return <p>No images to display</p>;
@@ -33,7 +26,8 @@ const ImageCarousel = ({ images }) => {
         alt={`Slide ${currentIndex}`}
         style={{
           width: '100%',
-          height: 'auto',
+          height: '300px', // Fixed height
+          objectFit: 'cover', // Ensures image covers the area without distortion
           borderRadius: '10px',
           transition: 'all 0.5s ease-in-out',
         }}
@@ -56,22 +50,6 @@ const ImageCarousel = ({ images }) => {
           />
         ))}
       </div>
-
-      <button
-        onClick={togglePlay}
-        style={{
-          marginTop: '15px',
-          padding: '8px 16px',
-          fontSize: '14px',
-          borderRadius: '5px',
-          border: 'none',
-          cursor: 'pointer',
-          backgroundColor: isPlaying ? '#f44336' : '#4CAF50',
-          color: 'white',
-        }}
-      >
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
     </div>
   );
 };
