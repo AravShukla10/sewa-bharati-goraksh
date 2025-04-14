@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import CarouselWithText from './components/CarouselWithText';
 
+
 import img1 from './images/1.webp';
 import img2 from './images/2.webp';
 import img3 from './images/3.webp';
@@ -13,6 +14,7 @@ import img7 from './images/7.webp';
 import img8 from './images/8.webp';
 import img9 from './images/9.webp';
 import img10 from './images/10.webp';
+import Footer from './components/Footer';
 
 const imageArray1 = [img1, img2, img3, img4, img5];
 const imageArray2 = [img6, img7, img8, img9, img10];
@@ -64,6 +66,7 @@ function App() {
         content={content2}
         languageType={languageType}
       />
+      <Footer/>
     </div>
   );
 }
