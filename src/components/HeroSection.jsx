@@ -25,7 +25,6 @@ const HeroSection = ({ languageType }) => {
 
   return (
     <section className="hero">
-      <div className="overlay"></div>
       <div className="hero-content">
         <h1>{currentContent.title}</h1>
         <p className="subtitle">{currentContent.subtitle}</p>

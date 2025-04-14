@@ -11,15 +11,6 @@
     margin-top: 40px;
   }
   
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* background-color: linear-gradient(rgb(249, 103, 5), rgb(223, 150, 14)); */
-  }
-  
   .hero-content {
     position: relative;
     z-index: 1;

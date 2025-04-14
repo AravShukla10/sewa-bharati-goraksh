@@ -2,7 +2,7 @@
 :root {
   --borderRadius: 10px;
   --spacer: 1rem;
-  --primary: #406ff3;
+  --primary: #f39340;
   --text: #6a778e;
   --linkHeight: calc(var(--spacer) * 3.5);
   --timing: 250ms;
