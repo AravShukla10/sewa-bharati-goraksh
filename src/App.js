@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import CarouselWithText from './components/CarouselWithText';
-
-
+import SewaBhartiSections from './components/SewaBhartiSections'; // Import the new component
+import ServiceMessage from './components/ServiceMessage';
 import img1 from './images/1.webp';
 import img2 from './images/2.webp';
 import img3 from './images/3.webp';
@@ -21,7 +21,7 @@ const imageArray2 = [img6, img7, img8, img9, img10];
 
 const content1 = {
   en: {
-    title: '	Bal Sanskar Kendra',
+    title: 'Bal Sanskar Kendra',
     description: 'Bal Sanskar Learning Centers are being operated in sewa basti with the motto of “Learn by Playing” for those children whose parents are engaged in daily wedges work (majdoori)  and they are generally used to collect waste plastic from dustbins or just wandering here or there. In the absence of adequate resources and proper guidance, these children may get involved in criminal activities. At Bal Sanskar Kendra, these children are getting educated with sanskar  These students learn about their study course in a play environment. Prarthana & Yogasan are also conducted on a daily basis. They are teaches for good services like cleanliness, health, society welfare and National devotion',
   },
   hi: {
@@ -42,18 +42,13 @@ const content2 = {
 };
 
 function App() {
-  const [languageType, setLanguageType] = useState('en'); 
-
-  const toggleLanguage = () => {
-    setLanguageType(languageType === 'en' ? 'hi' : 'en'); 
-  };
+  const [languageType, setLanguageType] = useState('en');
 
   return (
     <div className="App">
-      <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
-    
-
-      
+      <Navbar languageType={languageType} setLanguageType={setLanguageType} />
+      <SewaBhartiSections languageType={languageType} />
+      <ServiceMessage languageType={languageType} />
       <CarouselWithText
         images={imageArray1}
         position="left"
@@ -66,7 +61,9 @@ function App() {
         content={content2}
         languageType={languageType}
       />
-      <Footer/>
+      {/* Adding the new section */}
+    
+      <Footer />
     </div>
   );
 }
