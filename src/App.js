@@ -49,7 +49,7 @@ function App() {
     <div className="App">
       <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
 
-      <HeroSection/>
+      <HeroSection languageType={languageType} />
       
       <Navbar languageType={languageType} setLanguageType={setLanguageType} />
       <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
