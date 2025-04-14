@@ -2,37 +2,35 @@ import React, { useState, useEffect } from 'react';
 import * as Feather from 'feather-icons';
 import './styles/Navbar.css';
 
-function Navbar() {
+function Navbar({ languageType, setLanguageType }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState('EN');
 
   useEffect(() => {
     Feather.replace();
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    handleResize();
+    handleResize(); // Initial check
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     Feather.replace();
-  }, [isMenuOpen, language]);
+  }, [isMenuOpen, languageType]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleLanguage = () => setLanguage(prev => (prev === 'EN' ? 'HI' : 'EN'));
 
   const navItems = [
-    { icon: 'home', label: 'Home' },
-    { icon: 'info', label: 'About Us' },
-    { icon: 'activity', label: 'Activity' },
-    { icon: 'flag', label: 'Campaign/Drive' },
-    { icon: 'file-text', label: 'E-Bulletin' },
-    { icon: 'heart', label: 'Donate Here' },
-    { icon: 'user-plus', label: 'Join Us' },
-    { icon: 'phone', label: 'Contact Us' }
+    { icon: 'home', label: languageType === 'hi' ? 'होम' : 'Home' },
+    { icon: 'info', label: languageType === 'hi' ? 'हमारे बारे में' : 'About Us' },
+    { icon: 'activity', label: languageType === 'hi' ? 'गतिविधियाँ' : 'Activity' },
+    { icon: 'flag', label: languageType === 'hi' ? 'अभियान/ड्राइव' : 'Campaign/Drive' },
+    { icon: 'file-text', label: languageType === 'hi' ? 'ई-बुलेटिन' : 'E-Bulletin' },
+    { icon: 'heart', label: languageType === 'hi' ? 'दान करें' : 'Donate Here' },
+    { icon: 'user-plus', label: languageType === 'hi' ? 'हमसे जुड़ें' : 'Join Us' },
+    { icon: 'phone', label: languageType === 'hi' ? 'संपर्क करें' : 'Contact Us' }
   ];
 
   return (
@@ -44,11 +42,11 @@ function Navbar() {
       )}
 
       <div className="navbar__logo">
-        <img src="/logo.png" alt="Logo" />
+        <img src={require('../images/image.png')} alt="Logo" />
         <span>Sewa Bharti Goraksh</span>
       </div>
 
-      <ul className={`navbar__menu ${isMenuOpen ? 'show' : ''}`}>
+      <ul className={`navbar__menu ${isMenuOpen || !isMobile ? 'show' : ''}`}>
         {navItems.map((item, i) => (
           <li className="navbar__item" key={i}>
             <a href="#" className="navbar__link">
@@ -59,11 +57,12 @@ function Navbar() {
         ))}
       </ul>
 
-      <button className="lang-toggle" onClick={toggleLanguage}>
-        <span className={language === 'HI' ? 'active' : ''}>अ</span>
+      <button className="lang-toggle" onClick={() => setLanguageType(languageType === 'en' ? 'hi' : 'en')}>
+      <span className={languageType === 'hi' ? 'active' : ''}>अ</span>
         <span>/</span>
-        <span className={language === 'EN' ? 'active' : ''}>A</span>
+        <span className={languageType === 'en' ? 'active' : ''}>A</span>
       </button>
+      
     </nav>
   );
 }
