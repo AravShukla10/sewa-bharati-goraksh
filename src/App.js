@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import CarouselWithText from './components/CarouselWithText';
-import SewaBhartiSections from './components/SewaBhartiSections'; // Import the new component
+import SewaBhartiSections from './components/SewaBhartiSections'; 
 import ServiceMessage from './components/ServiceMessage';
 import img1 from './images/1.webp';
 import img2 from './images/2.webp';
@@ -17,6 +17,7 @@ import img10 from './images/10.webp';
 import Footer from './components/Footer';
 import HeroSection from './components/HeroSection';
 
+import ImageCarouselWithText from './components/ImageCarouselWithText';
 const imageArray1 = [img1, img2, img3, img4, img5];
 const imageArray2 = [img6, img7, img8, img9, img10];
 
@@ -41,6 +42,30 @@ const content2 = {
     description: 'सेवा भारती, गोरक्ष प्रांत, समाज के अनुसूचित जाति/जनजाति के छात्रों के उत्थान और सशक्तिकरण के लिए प्रतिबद्ध है। हमारा लक्ष्य उनकी क्षमता को जागृत करना और उन्हें आत्मनिर्भर और स्वाभिमानी नागरिक बनने के लिए आवश्यक कौशल और संसाधन प्रदान करना है। हमें सर्वश्रेष्ठ और प्रतिभाशाली लड़के और लड़कियों को खोजने और प्रशिक्षित करने की जिम्मेदारी लेने पर गर्व है जो हमारे देश के भविष्य के लिए पथप्रदर्शक बनेंगे। इसी क्रम में, सेवा भारती, गोरक्ष प्रांत ने 2016 से उत्तर प्रदेश के आर्यमगढ़ (आजमगढ़) के तरवां में एक छात्रावास शुरू किया है।',
   },
 };
+const images = [
+  'img1.jpg',
+  'img2.jpg',
+  'img3.jpg'
+];
+
+const campaignTexts = {
+  en: [
+    'Adolescent development',
+    'Proper nutrition (Suposhan Bharat)',
+    'Disaster management',
+  ],
+  hi: [
+    'किशोरी विकास',
+    'सुपोषण भारत',
+    'आपदा प्रबंधन',
+  ]
+};
+
+const campaignImages = [
+  'img1.jpg',
+  'img2.jpg',
+  'img3.jpg'
+];
 
 function App() {
   const [languageType, setLanguageType] = useState('en');
@@ -52,13 +77,13 @@ function App() {
       <HeroSection languageType={languageType} />
       
       <Navbar languageType={languageType} setLanguageType={setLanguageType} />
-      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
       {languageType === 'hi' ? 'सेवा भारती के प्रमुख आयाम' : 'Sewa Bharti Sectors'}
 
       </h2>
       <SewaBhartiSections languageType={languageType} />
       <ServiceMessage languageType={languageType} />
-      <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
           {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
       </h2>
       <CarouselWithText
@@ -73,8 +98,19 @@ function App() {
         content={content2}
         languageType={languageType}
       />
-      {/* Adding the new section */}
-    
+      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
+          {languageType === 'hi' ? 'गतिविधि' : 'Campaign/Drive'}
+      </h2>
+      <div >
+      <ImageCarouselWithText 
+  images={campaignImages} 
+  texts={campaignTexts[languageType]} 
+  autoplaySpeed={4000}
+/>
+
+
+</div>
+
       <Footer />
     </div>
   );
