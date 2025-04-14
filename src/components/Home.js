@@ -17,6 +17,11 @@ import img7 from '../images/7.webp';
 import img8 from '../images/8.webp';
 import img9 from '../images/9.webp';
 import img10 from '../images/10.webp';
+import nutrition from '../images/nutrition.webp';
+import disastermanagment from '../images/disastermanagment.webp';
+import adolscentdevelopment from '../images/adolscentdevelopment.webp';
+
+
 
 function Home({ languageType }) {
   const imageArray1 = [img1, img2, img3, img4, img5];
@@ -47,8 +52,13 @@ function Home({ languageType }) {
     },
   };
 
-  // Campaign (Drive) section texts and images
-  const campaignImages = ['img1.jpg', 'img2.jpg', 'img3.jpg'];
+ 
+  
+const campaignImages = [
+  adolscentdevelopment,
+   nutrition,
+  disastermanagment
+ ];
   const campaignTexts = {
     en: [
       'Adolescent development',
