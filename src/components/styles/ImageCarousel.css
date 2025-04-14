@@ -1,0 +1,174 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    height: 100%;
+  }
+  
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: 20px;
+    text-align: left;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .carousel-container:hover .carousel-arrow {
+    opacity: 1;
+  }
+  
+  .carousel-arrow:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .carousel-arrow:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+  
+  .carousel-arrow-left {
+    left: 15px;
+  }
+  
+  .carousel-arrow-right {
+    right: 15px;
+  }
+  
+  .carousel-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+  
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+  }
+  
+  .carousel-dot.active {
+    background-color: white;
+    width: 12px;
+    height: 12px;
+  }
+  
+  .carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+  }
+  
+  .carousel-progress-inner {
+    height: 100%;
+    background: linear-gradient(to right, #3498db, #2ecc71);
+    width: 0;
+    transition: width 0.3s linear;
+  }
+  
+  .carousel-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #6c757d;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .carousel-arrow {
+      width: 32px;
+      height: 32px;
+    }
+    
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .carousel-dot.active {
+      width: 10px;
+      height: 10px;
+    }
+    
+    .carousel-caption {
+      padding: 15px;
+    }
+  }
+  
+  /* Animation for automatic sliding */
+  @keyframes slideProgress {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  .carousel-container:not(:hover) .carousel-progress-inner {
+    animation: slideProgress linear forwards;
+  }
