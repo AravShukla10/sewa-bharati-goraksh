@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Navbar.css';
 
-function Navbar({ languageType, setLanguageType }) {
+function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0); // Default to first item
@@ -14,7 +14,7 @@ function Navbar({ languageType, setLanguageType }) {
         setIsMenuOpen(false);
       }
     };
-    
+
     handleResize(); // Initial check
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -34,8 +34,16 @@ function Navbar({ languageType, setLanguageType }) {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleNavItemClick = (index) => {
+  // When a nav item is clicked, update local activeItem and call parent's onNavItemClick.
+  const handleNavItemClickLocal = (index) => {
     setActiveItem(index);
+    // Map: if index is 0 then it's Home, so call parent's function with 1.
+    // Any other value will be treated as non-home.
+    if (index === 0) {
+      onNavItemClick(1);
+    } else {
+      onNavItemClick(index + 1);
+    }
     if (isMobile) {
       setIsMenuOpen(false);
     }
@@ -62,12 +70,12 @@ function Navbar({ languageType, setLanguageType }) {
       <ul className={`navbar__menu ${isMenuOpen || !isMobile ? 'show' : ''}`}>
         {navItems.map((item, i) => (
           <li className="navbar__item" key={i}>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className={`navbar__link ${activeItem === i ? 'active' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
-                handleNavItemClick(i);
+                handleNavItemClickLocal(i);
               }}
             >
               {item.label}
@@ -76,17 +84,25 @@ function Navbar({ languageType, setLanguageType }) {
         ))}
       </ul>
 
-      <button className="lang-toggle" onClick={() => setLanguageType(languageType === 'en' ? 'hi' : 'en')}>
+      <button
+        className="lang-toggle"
+        onClick={() =>
+          setLanguageType(languageType === 'en' ? 'hi' : 'en')
+        }
+      >
         <span className={languageType === 'hi' ? 'active' : ''}>अ</span>
         <span>/</span>
         <span className={languageType === 'en' ? 'active' : ''}>A</span>
       </button>
-      
+
       {isMobile && (
-        <div className="hamburger" onClick={(e) => {
-          e.stopPropagation();
-          toggleMenu();
-        }}>
+        <div
+          className="hamburger"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleMenu();
+          }}
+        >
           <div className="hamburger-icon">
             <span></span>
             <span></span>

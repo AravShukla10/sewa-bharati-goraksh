@@ -70,3 +70,53 @@ footer {
     height: 80vh;
   }
 }
+/* Basic resets and layout */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-close {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: #2980b9;
+}
+
+/* (Include any other styles for your application below) */

@@ -1,115 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import CarouselWithText from './components/CarouselWithText';
-import SewaBhartiSections from './components/SewaBhartiSections'; 
-import ServiceMessage from './components/ServiceMessage';
-import img1 from './images/1.webp';
-import img2 from './images/2.webp';
-import img3 from './images/3.webp';
-import img4 from './images/4.webp';
-import img5 from './images/5.webp';
-import img6 from './images/6.webp';
-import img7 from './images/7.webp';
-import img8 from './images/8.webp';
-import img9 from './images/9.webp';
-import img10 from './images/10.webp';
-import nutrition from './images/nutrition.webp';
-import disastermanagment from './images/disastermanagment.webp';
-import adolscentdevelopment from './images/adolscentdevelopment.webp';
-import Footer from './components/Footer';
-import HeroSection from './components/HeroSection';
-
-import ImageCarouselWithText from './components/ImageCarouselWithText';
-const imageArray1 = [img1, img2, img3, img4, img5];
-const imageArray2 = [img6, img7, img8, img9, img10];
-
-const content1 = {
-  en: {
-    title: 'Bal Sanskar Kendra',
-    description: 'Bal Sanskar Learning Centers are being operated in sewa basti with the motto of “Learn by Playing” for those children whose parents are engaged in daily wedges work (majdoori)  and they are generally used to collect waste plastic from dustbins or just wandering here or there. In the absence of adequate resources and proper guidance, these children may get involved in criminal activities. At Bal Sanskar Kendra, these children are getting educated with sanskar  These students learn about their study course in a play environment. Prarthana & Yogasan are also conducted on a daily basis. They are teaches for good services like cleanliness, health, society welfare and National devotion',
-  },
-  hi: {
-    title: 'बाल संस्कार केन्द्र',
-    description: 'सेवा बस्तियों में बाल संस्कार शिक्षण केन्द्रों का संचालन "खेल-खेल में सीखो" के उद्देश्य से किया जा रहा है। इन केन्द्रों पर ऐसे बच्चे रहते हैं जिनके माता-पिता मजदूरी करते हैं और उन्हें कूड़ेदानों से प्लास्टिक इकट्ठा करने या इधर-उधर भटकने के लिए भेजा जाता है। पर्याप्त संसाधनों और उचित मार्गदर्शन के अभाव में ये बच्चे आपराधिक गतिविधियों में शामिल हो सकते हैं। बाल संस्कार केन्द्र में इन बच्चों को संस्कारों के साथ शिक्षा दी जा रही है। ये छात्र खेल-खेल में अपने अध्ययन पाठ्यक्रम के बारे में सीखते हैं। प्रार्थना और योगासन भी प्रतिदिन करवाए जाते हैं। उन्हें स्वच्छता, स्वास्थ्य, समाज कल्याण और राष्ट्र भक्ति जैसी अच्छी सेवाओं के लिए सिखाया जाता है।',
-  },
-};
-
-const content2 = {
-  en: {
-    title: 'Hostel for Students',
-    description: `Sewa Bharati, Goraksh Prant, are committed to the upliftment and empowerment of SC/ST students of the society. Our goal is to awaken their potential and provide them with the skills and resources they need to become self-reliant and self-respecting citizens. We are proud to take on the responsibility of finding and training the best and brightest boys and girls who will become the torchbearers for our nation's future.In this continuation,  Sewa Bharati, Goraksh Prant has started a hostal in tarwan, Aryamgarh (Ajamgarh), Uttar Prdeesh since 2016.`,
-  },
-  hi: {
-    title: 'छात्रों के लिए छात्रावास',
-    description: 'सेवा भारती, गोरक्ष प्रांत, समाज के अनुसूचित जाति/जनजाति के छात्रों के उत्थान और सशक्तिकरण के लिए प्रतिबद्ध है। हमारा लक्ष्य उनकी क्षमता को जागृत करना और उन्हें आत्मनिर्भर और स्वाभिमानी नागरिक बनने के लिए आवश्यक कौशल और संसाधन प्रदान करना है। हमें सर्वश्रेष्ठ और प्रतिभाशाली लड़के और लड़कियों को खोजने और प्रशिक्षित करने की जिम्मेदारी लेने पर गर्व है जो हमारे देश के भविष्य के लिए पथप्रदर्शक बनेंगे। इसी क्रम में, सेवा भारती, गोरक्ष प्रांत ने 2016 से उत्तर प्रदेश के आर्यमगढ़ (आजमगढ़) के तरवां में एक छात्रावास शुरू किया है।',
-  },
-};
-
-const campaignTexts = {
-  en: [
-    'Adolescent development',
-    'Proper nutrition (Suposhan Bharat)',
-    'Disaster management',
-  ],
-  hi: [
-    'किशोरी विकास',
-    'सुपोषण भारत',
-    'आपदा प्रबंधन',
-  ]
-};
-
-const campaignImages = [
- adolscentdevelopment,
-  nutrition,
- disastermanagment
-];
+import Home from './components/Home';
 
 function App() {
   const [languageType, setLanguageType] = useState('en');
+  // activeScreen === 1 means show Home; any other value means non-home
+  const [activeScreen, setActiveScreen] = useState(1);
+  // showModal state when we need to display the "under construction" message.
+  const [showModal, setShowModal] = useState(false);
+  // Timer reference for the auto-close
+  const modalTimerRef = useRef(null);
+
+  // Callback to handle nav item change from Navbar
+  const handleNavChange = (screen) => {
+    if (screen !== 1) {
+      setShowModal(true);
+      // Start timer and save a reference
+      modalTimerRef.current = setTimeout(() => {
+        setShowModal(false);
+        setActiveScreen(1);
+      }, 3000);
+    } else {
+      setActiveScreen(1);
+    }
+  };
+
+  const closeModal = () => {
+    if (modalTimerRef.current) {
+      clearTimeout(modalTimerRef.current);
+      modalTimerRef.current = null;
+    }
+    setShowModal(false);
+    setActiveScreen(1);
+  };
 
   return (
     <div className="App">
-      <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
-
-      <HeroSection languageType={languageType} />
-      
-      <Navbar languageType={languageType} setLanguageType={setLanguageType} />
-      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
-      {languageType === 'hi' ? 'सेवा भारती के प्रमुख आयाम' : 'Sewa Bharti Sectors'}
-
-      </h2>
-      <SewaBhartiSections languageType={languageType} />
-      <ServiceMessage languageType={languageType} />
-      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
-          {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
-      </h2>
-      <CarouselWithText
-        images={imageArray1}
-        position="left"
-        content={content1}
+      <Navbar
         languageType={languageType}
+        setLanguageType={setLanguageType}
+        onNavItemClick={handleNavChange}
       />
-      <CarouselWithText
-        images={imageArray2}
-        position="right"
-        content={content2}
-        languageType={languageType}
-      />
-      <h2 style={{ textAlign: 'center', marginTop: '2rem',fontSize: '2rem' }}>
-          {languageType === 'hi' ? 'गतिविधि' : 'Campaign/Drive'}
-      </h2>
-      <div >
-      <ImageCarouselWithText 
-  images={campaignImages} 
-  texts={campaignTexts[languageType]} 
-  autoplaySpeed={4000}
-/>
 
-
-</div>
-
-      <Footer />
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+          <h2>
+              {languageType === 'hi'
+                ? 'सेवा भारती गोरक्ष'
+                : 'Sewa Bharti Goraksh'}
+            </h2>
+            <h2>
+              {languageType === 'hi'
+                ? 'यह पृष्ठ अभी निर्माणाधीन है, कृपया बाद में आएं'
+                : 'This page is under construction, stay tuned!'}
+            </h2>
+            <button className="modal-close" onClick={closeModal}>
+              {languageType === 'hi' ? 'बंद करें' : 'Close'}
+            </button>
+          </div>
+        </div>
+      )}
+     {activeScreen === 1 && <Home languageType={languageType} />}
     </div>
   );
 }
