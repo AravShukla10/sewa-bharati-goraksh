@@ -73,6 +73,7 @@ function Footer() {
 
       {/* Bottom section with copyright, policy links, etc. */}
       <div className="footer-bottom">
+        <p>Made with Love by team Bludgers.</p>
         <p>© 2024 Sewa Bharti, All rights reserved.</p>
         <div className="footer-bottom-links">
           <a href="/">Privacy Policy</a>
