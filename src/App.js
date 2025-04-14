@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar languageType={languageType} setLanguageType={setLanguageType}/>
       <button 
         onClick={toggleLanguage} 
         style={{ margin: '20px', padding: '10px', fontSize: '16px' }}

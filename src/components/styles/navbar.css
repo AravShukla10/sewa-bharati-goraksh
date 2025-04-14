@@ -171,3 +171,19 @@
     margin-right: var(--spacer);
   }
 }
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+  padding: 0 1rem;
+  white-space: nowrap;
+}
+
+.navbar__logo img {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+}
