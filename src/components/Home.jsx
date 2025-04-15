@@ -72,7 +72,7 @@ const campaignImages = [
     <div className="home-container">
       <HeroSection languageType={languageType} />
 
-      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}>
+      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}  id="sector-section">
         {languageType === 'hi'
           ? 'सेवा भारती के प्रमुख आयाम'
           : 'Sewa Bharti Sectors'}
@@ -80,7 +80,7 @@ const campaignImages = [
       <SewaBhartiSections languageType={languageType} />
       <ServiceMessage languageType={languageType} />
 
-      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}>
+      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="activity-section">
         {languageType === 'hi'
           ? 'सेवा भारती के कार्य'
           : 'Sewa Bharti Activities'}
@@ -98,8 +98,8 @@ const campaignImages = [
         languageType={languageType}
       />
 
-      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}>
-        {languageType === 'hi' ? 'गतिविधि' : 'Campaign/Drive'}
+      <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="campaign-section">
+        {languageType === 'hi' ? 'गतिविधि' : 'Campaign'}
       </h2>
       <ImageCarouselWithText
         images={campaignImages}

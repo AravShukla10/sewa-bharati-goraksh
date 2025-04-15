@@ -96,7 +96,7 @@ export default function Footer({ languageType }) {
           </div>
 
 
-          <div className="footer-column">
+          <div className="footer-column" id="contact-section">
             <h3 className="footer-heading">{texts.contact}</h3>
             <div className="footer-contact-info">
               <div className="footer-contact-item">
