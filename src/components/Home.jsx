@@ -99,7 +99,7 @@ const campaignImages = [
       />
 
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="campaign-section">
-        {languageType === 'hi' ? 'गतिविधि' : 'Campaign'}
+        {languageType === 'hi' ? 'अभियान' : 'Campaign'}
       </h2>
       <ImageCarouselWithText
         images={campaignImages}
