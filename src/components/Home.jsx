@@ -69,7 +69,7 @@ const campaignImages = [
   };
 
   return (
-    <div className="home-container">
+    <div className="home-container" id="hero-section">
       <HeroSection languageType={languageType} />
 
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}  id="sector-section">

@@ -6,13 +6,20 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
 
+  
+  const sectionScrollMap = {
+    0: 'hero-section',
+    1: 'sector-section',   
+    2: 'activity-section',  
+    3: 'campaign-section',  
+    7: 'contact-section'    
+  };
+
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (!mobile && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
+      if (!mobile && isMenuOpen) setIsMenuOpen(false);
     };
 
     handleResize();
@@ -31,76 +38,26 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMenuOpen]);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact-section');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
     }
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
+    if (isMobile) setIsMenuOpen(false);
   };
-
-  const scrollToActivity = () => {
-    const activitySection = document.getElementById('activity-section');
-    if (activitySection) {
-      activitySection.scrollIntoView({ behavior: 'smooth' });
-    }
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
-  };
-
-const scrollToSector = () => {
-  const sectorSection = document.getElementById('sector-section');
-  if(sectorSection){
-    sectorSection.scrollIntoView({behavior: 'smooth'});
-  }
-  if (isMobile) {
-    setIsMenuOpen(false);
-  }
-}
-
-const scrollToCampaign = () => {
-  const campaignSection = document.getElementById('campaign-section');
-  if(campaignSection){
-    campaignSection.scrollIntoView({behavior: 'smooth'});
-  }
-  if (isMobile) {
-    setIsMenuOpen(false);
-  }
-}
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavItemClick = (index) => {
     setActiveItem(index);
     
-    // Special handling for Contact Us (last item)
-    if (index === navItems.length - 1) {
-      scrollToContact();
-      return;
-    } else if(index === 2){
-      scrollToActivity();
-      return;
-    } else if(index === 1){
-      scrollToSector();
-      return;
-    } else if(index === 3){
-      scrollToCampaign();
+    // Handle scrollable sections
+    if (sectionScrollMap.hasOwnProperty(index)) {
+      scrollToSection(sectionScrollMap[index]);
       return;
     }
     
     // Default handling for other items
-    if (index === 0) {
-      onNavItemClick(1);
-    } else {
-      onNavItemClick(index + 1);
-    }
-    
-    if (isMobile) {
-      setIsMenuOpen(false);
-    }
+    onNavItemClick(index === 0 ? 1 : index + 1);
+    if (isMobile) setIsMenuOpen(false);
   };
 
   const navItems = [
@@ -113,6 +70,8 @@ const scrollToCampaign = () => {
     { label: languageType === 'hi' ? 'हमसे जुड़ें' : 'Join Us' },
     { label: languageType === 'hi' ? 'संपर्क करें' : 'Contact Us' }
   ];
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <nav className="navbar">
@@ -148,13 +107,7 @@ const scrollToCampaign = () => {
       </button>
 
       {isMobile && (
-        <div
-          className="hamburger"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleMenu();
-          }}
-        >
+        <div className="hamburger" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
           <div className="hamburger-icon">
             <span></span>
             <span></span>
