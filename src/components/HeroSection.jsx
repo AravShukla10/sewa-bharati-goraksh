@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles/HeroSection.css';
 import sevabharti from '../images/p2.png';
-
+import sevabharti2 from '../images/p3.jpg';
+import sevabharti3 from '../images/p4.png';
+import disaster from '../images/disastermanagment.webp';
 const slides = [
   {
     en: {
@@ -46,7 +48,7 @@ const slides = [
         "Through relief and rescue operations, RSS and Seva Bharati volunteers are working tirelessly in affected areas."
       ],
       cta: "Donate Now",
-      image: "https://www.canva.com/design/DAGZw0bh4CU/jvMNAmixDiI1u91XDtm85Q/view"
+      image: sevabharti3,
     },
     hi: {
       title: "सेवा भारती गोरक्ष",
@@ -60,7 +62,7 @@ const slides = [
         "राहत और बचाव अभियानों के माध्यम से, आरएसएस और सेवा भारती के स्वयंसेवक प्रभावित क्षेत्रों में अथक परिश्रम कर रहे हैं।"
       ],
       cta: "अभी दान करें",
-      image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: sevabharti3,
     }
   },
   {
@@ -76,7 +78,7 @@ const slides = [
         "Join us in creating a self-reliant society where every individual has equal opportunities to grow."
       ],
       cta: "Volunteer With Us",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: sevabharti2,
     },
     hi: {
       title: "सेवा भारती गोरक्ष",
@@ -90,7 +92,7 @@ const slides = [
         "हमारे साथ जुड़कर एक आत्मनिर्भर समाज के निर्माण में सहयोग करें जहां हर व्यक्ति के पास विकास के समान अवसर हों।"
       ],
       cta: "हमारे साथ स्वयंसेवक बनें",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: sevabharti2,
     }
   }
 ];
