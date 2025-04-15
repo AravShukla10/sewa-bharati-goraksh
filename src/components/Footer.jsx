@@ -101,8 +101,10 @@ export default function Footer({ languageType }) {
             <div className="footer-contact-info">
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
-                <p>Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)</p>
-              </div>
+                <p style={{ textAlign: 'justify' }}>
+  Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
+</p>
+   </div>
               <div className="footer-contact-item">
                 <Phone className="footer-icon" />
                 <p>+2345340, +2345015, 0800005561</p>
