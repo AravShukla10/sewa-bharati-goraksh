@@ -4,7 +4,7 @@ import './styles/Navbar.css';
 function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(0); // Default to first item
+  const [activeItem, setActiveItem] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,12 +15,11 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
       }
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMenuOpen && !event.target.closest('.navbar')) {
@@ -32,18 +31,73 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMenuOpen]);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact-section');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+  };
+
+  const scrollToActivity = () => {
+    const activitySection = document.getElementById('activity-section');
+    if (activitySection) {
+      activitySection.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (isMobile) {
+      setIsMenuOpen(false);
+    }
+  };
+
+const scrollToSector = () => {
+  const sectorSection = document.getElementById('sector-section');
+  if(sectorSection){
+    sectorSection.scrollIntoView({behavior: 'smooth'});
+  }
+  if (isMobile) {
+    setIsMenuOpen(false);
+  }
+}
+
+const scrollToCampaign = () => {
+  const campaignSection = document.getElementById('campaign-section');
+  if(campaignSection){
+    campaignSection.scrollIntoView({behavior: 'smooth'});
+  }
+  if (isMobile) {
+    setIsMenuOpen(false);
+  }
+}
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // When a nav item is clicked, update local activeItem and call parent's onNavItemClick.
-  const handleNavItemClickLocal = (index) => {
+  const handleNavItemClick = (index) => {
     setActiveItem(index);
-    // Map: if index is 0 then it's Home, so call parent's function with 1.
-    // Any other value will be treated as non-home.
+    
+    // Special handling for Contact Us (last item)
+    if (index === navItems.length - 1) {
+      scrollToContact();
+      return;
+    } else if(index === 2){
+      scrollToActivity();
+      return;
+    } else if(index === 1){
+      scrollToSector();
+      return;
+    } else if(index === 3){
+      scrollToCampaign();
+      return;
+    }
+    
+    // Default handling for other items
     if (index === 0) {
       onNavItemClick(1);
     } else {
       onNavItemClick(index + 1);
     }
+    
     if (isMobile) {
       setIsMenuOpen(false);
     }
@@ -53,7 +107,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
     { label: languageType === 'hi' ? 'होम' : 'Home' },
     { label: languageType === 'hi' ? 'हमारे बारे में' : 'About Us' },
     { label: languageType === 'hi' ? 'गतिविधियाँ' : 'Activity' },
-    { label: languageType === 'hi' ? 'अभियान/ड्राइव' : 'Campaign/Drive' },
+    { label: languageType === 'hi' ? 'अभियान' : 'Campaign' },
     { label: languageType === 'hi' ? 'ई-बुलेटिन' : 'E-Bulletin' },
     { label: languageType === 'hi' ? 'दान करें' : 'Donate Here' },
     { label: languageType === 'hi' ? 'हमसे जुड़ें' : 'Join Us' },
@@ -75,7 +129,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
               className={`navbar__link ${activeItem === i ? 'active' : ''}`}
               onClick={(e) => {
                 e.preventDefault();
-                handleNavItemClickLocal(i);
+                handleNavItemClick(i);
               }}
             >
               {item.label}
@@ -86,9 +140,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
 
       <button
         className="lang-toggle"
-        onClick={() =>
-          setLanguageType(languageType === 'en' ? 'hi' : 'en')
-        }
+        onClick={() => setLanguageType(languageType === 'en' ? 'hi' : 'en')}
       >
         <span className={languageType === 'hi' ? 'active' : ''}>अ</span>
         <span>/</span>
