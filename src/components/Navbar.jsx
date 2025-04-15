@@ -37,6 +37,8 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   // When a nav item is clicked, update local activeItem and call parent's onNavItemClick.
   const handleNavItemClickLocal = (index) => {
     setActiveItem(index);
+    // Map: if index is 0 then it's Home, so call parent's function with 1.
+    // Any other value will be treated as non-home.
     if (index === 0) {
       onNavItemClick(1);
     } else {
@@ -62,7 +64,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
     <nav className="navbar">
       <div className="navbar__logo">
         <img src={require('../images/image.png')} alt="Logo" />
-        <span>Sewa Bharti Goraksh</span>
+        <span>{ languageType === 'hi' ? 'सेवा भारती गोरक्ष' : 'Sewa Bharati Goraksh' }</span>
       </div>
 
       <ul className={`navbar__menu ${isMenuOpen || !isMobile ? 'show' : ''}`}>
