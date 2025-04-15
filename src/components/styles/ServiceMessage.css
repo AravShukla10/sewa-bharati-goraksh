@@ -180,6 +180,7 @@
 
   .service-categories {
     flex-direction: column;
+    width: 90%;
   }
 
   .category {

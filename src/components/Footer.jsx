@@ -203,8 +203,7 @@ export default function Footer({ languageType }) {
         </div>
       </div>
       
-      {/* Bottom section with copyright, policy links, etc. */}
-      <div className="footer-bottom">
+       <div className="footer-bottom">
         <div className="footer-bottom-container">
           <p className="footer-copyright">© {currentYear} Sewa Bharti. All rights reserved.</p>
           <div className="footer-bottom-links">
@@ -216,11 +215,10 @@ export default function Footer({ languageType }) {
         </div>
       </div>
 
-      {/* Updated credit line with mailto functionality on "Bludgers" */}
-      <div className="footer-credit">
+       <div className="footer-credit">
         <p>
           {texts.developedByPre}
-          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline" }}>
+          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline" ,color: "white"}}>
             Bludgers
           </a>
           {texts.developedByPost}
