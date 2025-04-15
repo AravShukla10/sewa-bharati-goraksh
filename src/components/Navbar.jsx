@@ -61,7 +61,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   return (
     <nav className="navbar">
       <div className="navbar__logo">
-        <img src={require('../images/image.png')} alt="Logo" />
+        <img src={require('../images/image.webp')} alt="Logo" />
         <span>Sewa Bharti Goraksh</span>
       </div>
 
