@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles/HeroSection.css';
-import sevabharti from '../images/p2.png';
-import sevabharti2 from '../images/p3.jpg';
-import sevabharti3 from '../images/p4.png';
+import sevabharti from '../images/p2.webp';
+import sevabharti2 from '../images/p3.webp';
+import sevabharti3 from '../images/p4.webp';
 import disaster from '../images/disastermanagment.webp';
 const slides = [
   {
