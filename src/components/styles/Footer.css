@@ -28,14 +28,17 @@
 }
 
 /* Footer headings */
+/* Footer headings */
 .footer-heading {
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
+  text-align: left; /* Ensures the heading text is left aligned */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   position: relative;
 }
+
 
 /* Subheadings */
 .footer-subheading {

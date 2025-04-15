@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles/HeroSection.css';
-import sevabharti from '../images/sevabharti.webp';
+import sevabharti from '../images/p2.png';
+
 const slides = [
   {
     en: {
@@ -29,7 +30,7 @@ const slides = [
         "सेवा भारती स्वयंसेवकों द्वारा संचालित एक सेवा संगठन है जो विशेष रूप से सेवा बस्तियों में कार्य करती है जहां वंचित और उपेक्षित समुदाय रहते हैं।"
       ],
       cta: "हमारे मिशन से जुड़ें",
-      image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: sevabharti,
     }
   },
   {
@@ -45,7 +46,7 @@ const slides = [
         "Through relief and rescue operations, RSS and Seva Bharati volunteers are working tirelessly in affected areas."
       ],
       cta: "Donate Now",
-      image: "https://images.unsplash.com/photo-1583324113626-70df0f4deaab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      image: "https://www.canva.com/design/DAGZw0bh4CU/jvMNAmixDiI1u91XDtm85Q/view"
     },
     hi: {
       title: "सेवा भारती गोरक्ष",
@@ -93,29 +94,26 @@ const slides = [
     }
   }
 ];
+
 const HeroSection = ({ languageType }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [startX, setStartX] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [slideDirection, setSlideDirection] = useState('right');
   const sliderRef = useRef(null);
   const slideTimeoutRef = useRef(null);
 
   const goToSlide = (index) => {
     if (index === currentSlide) return;
-    setSlideDirection(index > currentSlide ? 'right' : 'left');
     setCurrentSlide(index);
     resetAutoSlide();
   };
 
   const goToNextSlide = () => {
-    setSlideDirection('right');
     setCurrentSlide(prev => (prev + 1) % slides.length);
     resetAutoSlide();
   };
 
   const goToPrevSlide = () => {
-    setSlideDirection('left');
     setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
     resetAutoSlide();
   };
@@ -138,7 +136,6 @@ const HeroSection = ({ languageType }) => {
     if (!startX) return;
     const currentX = e.touches ? e.touches[0].clientX : e.clientX;
     const diff = startX - currentX;
-    
     if (Math.abs(diff)) {
       e.preventDefault();
     }
@@ -165,6 +162,10 @@ const HeroSection = ({ languageType }) => {
   }, [currentSlide, isDragging]);
 
   const currentContent = languageType === 'hi' ? slides[currentSlide].hi : slides[currentSlide].en;
+  // Extract first quote from the paragraphs array if it exists
+  const firstQuoteObj = currentContent.paragraphs.find(
+    (para) => typeof para === 'object' && para.quote
+  );
 
   return (
     <section 
@@ -178,60 +179,45 @@ const HeroSection = ({ languageType }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
+      {/* Image at the top */}
+      <div 
+        className="hs-image-content"
+        style={{ backgroundImage: `url(${currentContent.image})` }}
+      />
       
-      <div className="hs-slide-container">
-        <div 
-          className={`hs-text-content hs-slide-${slideDirection}`}
-          key={`text-${currentSlide}`}
-        >
-          <div className="hs-content-wrapper">
-            <h1 className="hs-title">{currentContent.title}</h1>
-            <p className="hs-subtitle">{currentContent.subtitle}</p>
-            <div className="hs-mission-text">
-              {currentContent.paragraphs.map((para, index) => {
-                if (typeof para === 'object' && para.quote) {
-                  return (
-                    <div key={index} className="hs-quote-container">
-                      <blockquote className="hs-quote-text">"{para.quote}"</blockquote>
-                      <p className="hs-regular-text">{para.regular}</p>
-                    </div>
-                  );
-                }
-                return <p key={index} className="hs-regular-text">{para}</p>;
-              })}
-            </div>
-            <button className="hs-cta-button">{currentContent.cta}</button>
-          </div>
-        </div>
-        
-        <div 
-          className={`hs-image-content hs-slide-${slideDirection}`}
-          style={{ backgroundImage: `url(${currentContent.image})` }}
-          key={`image-${currentSlide}`}
-        >
-          <div className="hs-image-overlay"></div>
+      {/* Reduced Text Content */}
+      <div className="hs-text-content">
+        <div className="hs-content-wrapper">
+          <h1 className="hs-title">{currentContent.title}</h1>
+          {firstQuoteObj && (
+            <blockquote className="hs-quote-text">
+              "{firstQuoteObj.quote}"
+            </blockquote>
+          )}
+          <p className="hs-subtitle">{currentContent.subtitle}</p>
         </div>
       </div>
 
-      <div className="hs-slider-controls">
-        <button className="hs-slider-prev" onClick={goToPrevSlide} aria-label="Previous slide">
-          &lt;
-        </button>
-        
-        <div className="hs-slider-indicator">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`hs-indicator-dot ${index === currentSlide ? 'hs-active' : ''}`}
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+      {/* Controls: dots and navigation buttons in vertical stack */}
+      <div className="hs-controls">
+        <div className="hs-slider-nav">
+          <button className="hs-slider-prev" onClick={goToPrevSlide} aria-label="Previous slide">
+            &lt;
+          </button>
+          <div className="hs-slider-indicators">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                className={`hs-indicator-dot ${index === currentSlide ? 'hs-active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+          <button className="hs-slider-next" onClick={goToNextSlide} aria-label="Next slide">
+            &gt;
+          </button>
         </div>
-        
-        <button className="hs-slider-next" onClick={goToNextSlide} aria-label="Next slide">
-          &gt;
-        </button>
       </div>
     </section>
   );
