@@ -37,8 +37,6 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
   // When a nav item is clicked, update local activeItem and call parent's onNavItemClick.
   const handleNavItemClickLocal = (index) => {
     setActiveItem(index);
-    // Map: if index is 0 then it's Home, so call parent's function with 1.
-    // Any other value will be treated as non-home.
     if (index === 0) {
       onNavItemClick(1);
     } else {

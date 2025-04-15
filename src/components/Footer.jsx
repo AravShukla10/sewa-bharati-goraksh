@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 import "./styles/Footer.css";
 
 export default function Footer({ languageType }) {
   const [email, setEmail] = useState("");
+  const currentYear = new Date().getFullYear();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,9 +20,7 @@ export default function Footer({ languageType }) {
     setEmail("");
   };
 
-  const currentYear = new Date().getFullYear();
-
-  // Define text content based on languageType.
+  // Language-based text
   const texts = {
     getToKnowUs: languageType === "hi" ? "हमारे बारे में जानें" : "Get to Know Us",
     ourJourney: languageType === "hi" ? "हमारी यात्रा" : "Our Journey",
@@ -37,175 +44,92 @@ export default function Footer({ languageType }) {
     emailCallQuery: languageType === "hi" ? "ईमेल / कॉल / प्रश्न" : "Email / Call / Query",
 
     contact: languageType === "hi" ? "संपर्क" : "Contact",
-    
+
     privacyPolicy: languageType === "hi" ? "गोपनीयता नीति" : "Privacy Policy",
     termsConditions: languageType === "hi" ? "नियम व शर्तें" : "Terms & Conditions",
     sitemap: languageType === "hi" ? "साइट मानचित्र" : "Sitemap",
     accessibility: languageType === "hi" ? "पहुँच" : "Accessibility",
 
     developedByPre: languageType === "hi" ? "टीम " : "Developed by Team ",
-    developedByPost: languageType === "hi" ? " द्वारा विकसित" : ""
+    developedByPost: languageType === "hi" ? " द्वारा विकसित" : "",
+    allRightsReserved: languageType === "hi" ? "सर्वाधिकार सुरक्षित।" : "All rights reserved."
   };
 
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-top">
+          {/* Column 1 */}
           <div className="footer-column">
             <h3 className="footer-heading">{texts.getToKnowUs}</h3>
             <ul className="footer-list">
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.ourJourney}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.ourPartners}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.gallery}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.newsMedia}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.contactUs}
-                </a>
-              </li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.ourJourney}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.ourPartners}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.gallery}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.newsMedia}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.contactUs}</a></li>
             </ul>
           </div>
-          
+
+          {/* Column 2 */}
           <div className="footer-column">
             <h3 className="footer-heading">{texts.ourInitiatives}</h3>
             <ul className="footer-list">
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.childCare}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.education}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.health}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.empowerment}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.social}
-                </a>
-              </li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.childCare}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.education}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.health}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.empowerment}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.social}</a></li>
             </ul>
           </div>
-          
+
+          {/* Column 3 */}
           <div className="footer-column">
             <h3 className="footer-heading">{texts.getInvolved}</h3>
             <ul className="footer-list">
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.beVolunteer}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.donateMoney}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.donateKind}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.donateSkill}
-                </a>
-              </li>
-              <li>
-                <a href="/">
-                  <span className="footer-list-dot"></span>
-                  {texts.emailCallQuery}
-                </a>
-              </li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.beVolunteer}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.donateMoney}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.donateKind}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.donateSkill}</a></li>
+              <li><a href="/"><span className="footer-list-dot" />{texts.emailCallQuery}</a></li>
             </ul>
           </div>
-              
+
+
           <div className="footer-column">
             <h3 className="footer-heading">{texts.contact}</h3>
             <div className="footer-contact-info">
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
-                <p>
-                  Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
-                </p>
+                <p>Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)</p>
               </div>
-              
               <div className="footer-contact-item">
                 <Phone className="footer-icon" />
                 <p>+2345340, +2345015, 0800005561</p>
               </div>
-              
               <div className="footer-contact-item">
                 <Mail className="footer-icon" />
-                <a href="mailto:contact@sewabharti.org">
-                  contact@sewabharti.org
-                </a>
+                <a href="mailto:contact@sewabharti.org">contact@sewabharti.org</a>
               </div>
             </div>
-            
-            {/* Social links */}
+
+   
             <div className="footer-social">
               <div className="footer-social-icons">
-                <a href="/" aria-label="Facebook" className="footer-social-icon">
-                  <Facebook size={20} />
-                </a>
-                <a href="/" aria-label="Twitter" className="footer-social-icon">
-                  <Twitter size={20} />
-                </a>
-                <a href="/" aria-label="Instagram" className="footer-social-icon">
-                  <Instagram size={20} />
-                </a>
-                <a href="/" aria-label="YouTube" className="footer-social-icon">
-                  <Youtube size={20} />
-                </a>
+                <a href="/" aria-label="Facebook" className="footer-social-icon"><Facebook size={20} /></a>
+                <a href="/" aria-label="Twitter" className="footer-social-icon"><Twitter size={20} /></a>
+                <a href="/" aria-label="Instagram" className="footer-social-icon"><Instagram size={20} /></a>
+                <a href="/" aria-label="YouTube" className="footer-social-icon"><Youtube size={20} /></a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-       <div className="footer-bottom">
+
+      {/* Bottom */}
+      <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p className="footer-copyright">© {currentYear} Sewa Bharti. All rights reserved.</p>
+          <p>© {currentYear} Sewa Bharti. {texts.allRightsReserved}</p>
           <div className="footer-bottom-links">
             <a href="/privacy">{texts.privacyPolicy}</a>
             <a href="/terms">{texts.termsConditions}</a>
@@ -215,10 +139,11 @@ export default function Footer({ languageType }) {
         </div>
       </div>
 
-       <div className="footer-credit">
+      {/* Dev Credit */}
+      <div className="footer-credit">
         <p>
           {texts.developedByPre}
-          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline" ,color: "white"}}>
+          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline", color: "white" }}>
             Bludgers
           </a>
           {texts.developedByPost}

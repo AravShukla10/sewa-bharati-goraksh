@@ -3,7 +3,6 @@ import './styles/HeroSection.css';
 import sevabharti from '../images/p2.png';
 import sevabharti2 from '../images/p3.jpg';
 import sevabharti3 from '../images/p4.png';
-import disaster from '../images/disastermanagment.webp';
 const slides = [
   {
     en: {
