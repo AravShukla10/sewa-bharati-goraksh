@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import "./styles/Footer.css";
 
-export default function Footer() {
+export default function Footer({ languageType }) {
   const [email, setEmail] = useState("");
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Thank you for subscribing with: ${email}`);
@@ -12,46 +12,155 @@ export default function Footer() {
   };
 
   const currentYear = new Date().getFullYear();
-  
+
+  // Define text content based on languageType.
+  const texts = {
+    getToKnowUs: languageType === "hi" ? "हमारे बारे में जानें" : "Get to Know Us",
+    ourJourney: languageType === "hi" ? "हमारी यात्रा" : "Our Journey",
+    ourPartners: languageType === "hi" ? "हमारे साथी" : "Our Partners",
+    gallery: languageType === "hi" ? "गैलरी" : "Gallery",
+    newsMedia: languageType === "hi" ? "समाचार एवं मीडिया" : "News & Media",
+    contactUs: languageType === "hi" ? "संपर्क करें" : "Contact Us",
+
+    ourInitiatives: languageType === "hi" ? "हमारी पहल" : "Our Initiatives",
+    childCare: languageType === "hi" ? "बाल देखभाल" : "Child Care",
+    education: languageType === "hi" ? "शिक्षा" : "Education",
+    health: languageType === "hi" ? "स्वास्थ्य" : "Health",
+    empowerment: languageType === "hi" ? "सशक्तिकरण" : "Empowerment",
+    social: languageType === "hi" ? "सामाजिक" : "Social",
+
+    getInvolved: languageType === "hi" ? "शामिल हों" : "Get Involved",
+    beVolunteer: languageType === "hi" ? "स्वयंसेवक बनें" : "Be a Volunteer",
+    donateMoney: languageType === "hi" ? "धन दान करें" : "Donate Money",
+    donateKind: languageType === "hi" ? "सामग्री दान" : "Donate in Kind",
+    donateSkill: languageType === "hi" ? "कौशल दान" : "Donate Skill",
+    emailCallQuery: languageType === "hi" ? "ईमेल / कॉल / प्रश्न" : "Email / Call / Query",
+
+    contact: languageType === "hi" ? "संपर्क" : "Contact",
+    
+    privacyPolicy: languageType === "hi" ? "गोपनीयता नीति" : "Privacy Policy",
+    termsConditions: languageType === "hi" ? "नियम व शर्तें" : "Terms & Conditions",
+    sitemap: languageType === "hi" ? "साइट मानचित्र" : "Sitemap",
+    accessibility: languageType === "hi" ? "पहुँच" : "Accessibility",
+
+    developedByPre: languageType === "hi" ? "टीम " : "Developed by Team ",
+    developedByPost: languageType === "hi" ? " द्वारा विकसित" : ""
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-top">
           <div className="footer-column">
-            <h3 className="footer-heading">Get to Know Us</h3>
+            <h3 className="footer-heading">{texts.getToKnowUs}</h3>
             <ul className="footer-list">
-              <li><a href="/"><span className="footer-list-dot"></span>Our Journey</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Our Partners</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Gallery</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>News & Media</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Contact Us</a></li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.ourJourney}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.ourPartners}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.gallery}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.newsMedia}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.contactUs}
+                </a>
+              </li>
             </ul>
           </div>
           
           <div className="footer-column">
-            <h3 className="footer-heading">Our Initiatives</h3>
+            <h3 className="footer-heading">{texts.ourInitiatives}</h3>
             <ul className="footer-list">
-              <li><a href="/"><span className="footer-list-dot"></span>Child Care</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Education</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Health</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Empowerment</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Social</a></li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.childCare}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.education}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.health}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.empowerment}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.social}
+                </a>
+              </li>
             </ul>
           </div>
           
           <div className="footer-column">
-            <h3 className="footer-heading">Get Involved</h3>
+            <h3 className="footer-heading">{texts.getInvolved}</h3>
             <ul className="footer-list">
-              <li><a href="/"><span className="footer-list-dot"></span>Be a Volunteer</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Donate Money</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Donate in Kind</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Donate Skill</a></li>
-              <li><a href="/"><span className="footer-list-dot"></span>Email / Call / Query</a></li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.beVolunteer}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.donateMoney}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.donateKind}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.donateSkill}
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <span className="footer-list-dot"></span>
+                  {texts.emailCallQuery}
+                </a>
+              </li>
             </ul>
           </div>
               
           <div className="footer-column">
-            <h3 className="footer-heading">Contact</h3>
+            <h3 className="footer-heading">{texts.contact}</h3>
             <div className="footer-contact-info">
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
@@ -99,17 +208,23 @@ export default function Footer() {
         <div className="footer-bottom-container">
           <p className="footer-copyright">© {currentYear} Sewa Bharti. All rights reserved.</p>
           <div className="footer-bottom-links">
-            <a href="/privacy">Privacy Policy</a>
-            <a href="/terms">Terms & Conditions</a>
-            <a href="/sitemap">Sitemap</a>
-            <a href="/accessibility">Accessibility</a>
+            <a href="/privacy">{texts.privacyPolicy}</a>
+            <a href="/terms">{texts.termsConditions}</a>
+            <a href="/sitemap">{texts.sitemap}</a>
+            <a href="/accessibility">{texts.accessibility}</a>
           </div>
         </div>
       </div>
 
-      {/* Additional credit line */}
+      {/* Updated credit line with mailto functionality on "Bludgers" */}
       <div className="footer-credit">
-        <p>Developed by Team Bludgers</p>
+        <p>
+          {texts.developedByPre}
+          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline" }}>
+            Bludgers
+          </a>
+          {texts.developedByPost}
+        </p>
       </div>
     </footer>
   );

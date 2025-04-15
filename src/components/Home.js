@@ -107,7 +107,7 @@ const campaignImages = [
         autoplaySpeed={4000}
       />
 
-      <Footer />
+      <Footer languageType={languageType}/>
     </div>
   );
 }
