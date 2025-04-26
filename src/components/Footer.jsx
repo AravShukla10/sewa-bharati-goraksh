@@ -88,7 +88,7 @@ export default function Footer({ languageType, setActiveScreen, activeScreen}) {
             <h3 className="footer-heading">{texts.getInvolved}</h3>
             <ul className="footer-list">
               <li><a href="https://docs.google.com/forms/d/1n0THm9wrKArIKr6qJGhs32vDvBEcgqC6jeXvYqgfFEU/preview" target="_blank"><span className="footer-list-dot" />{texts.beVolunteer}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.donateMoney}</a></li>
+              <li><a href="#"  onClick={(e) => {e.preventDefault(); setActiveScreen(3);}}><span className="footer-list-dot" />{texts.donateMoney}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.donateKind}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.donateSkill}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.emailCallQuery}</a></li>
