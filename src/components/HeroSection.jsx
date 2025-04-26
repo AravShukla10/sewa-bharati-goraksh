@@ -164,7 +164,7 @@ const HeroSection = ({ languageType }) => {
   }, [currentSlide, isDragging]);
 
   const currentContent = languageType === 'hi' ? slides[currentSlide].hi : slides[currentSlide].en;
-  // Extract first quote from the paragraphs array if it exists
+
   const firstQuoteObj = currentContent.paragraphs.find(
     (para) => typeof para === 'object' && para.quote
   );

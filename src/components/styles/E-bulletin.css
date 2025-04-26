@@ -19,34 +19,26 @@
 .pdf-wrapper {
     position: relative;
     width: 100%;
- 
-   /* Set a reasonable max-width */
+    max-width: 1000px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start */
     background: white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 20px;
     box-sizing: border-box;
     margin: 0 auto;
-    min-height: 70vh; /* Minimum height to prevent collapsing */
+    min-height: auto; /* Changed from fixed height to auto */
 }
 
-.pdf-viewer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 .pdf-viewer {
     width: 100%;
     overflow: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
-    max-height: 80vh;
+    max-height: calc(100vh - 100px); /* Dynamic height based on viewport */
+    min-height: 700px;
 }
 
 /* Arrow buttons */
@@ -115,8 +107,6 @@
     background-color: #c82333;
 }
 
-/* Previous styles remain the same, add these new styles */
-
 .controls {
     display: flex;
     justify-content: space-between;
@@ -157,5 +147,3 @@
     text-align: center;
     font-weight: 600;
 }
-
-/* Adjust the pdf-viewer to handle zoom */
