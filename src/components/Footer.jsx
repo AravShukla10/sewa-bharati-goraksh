@@ -67,7 +67,7 @@ export default function Footer({ languageType, setActiveScreen, activeScreen}) {
               <li><a href="/"><span className="footer-list-dot" />{texts.ourPartners}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.gallery}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.newsMedia}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.contactUs}</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(8);}}><span className="footer-list-dot" />{texts.contactUs}</a></li>
             </ul>
           </div>
 
