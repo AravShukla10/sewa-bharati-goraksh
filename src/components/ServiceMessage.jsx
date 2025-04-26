@@ -21,7 +21,7 @@ const ServiceMessage = ({ languageType }) => {
         {
           title: "Category 1: Upliftment",
           description:
-            "Making efforts so that the person who is served today becomes self-reliant, self-respecting, and serves others tomorrow.",
+            "Making efforts so that the person who is served today becomes self-reliant, self-respecting, and the one who serves others tomorrow.",
         },
         {
           title: "Category 2: Empowerment",
@@ -87,7 +87,7 @@ const ServiceMessage = ({ languageType }) => {
           {content[languageType].categories.map((category, index) => (
             <div className={`category category-${index + 1}`} key={index}>
               <div className="category-icon">{index + 1}</div>
-              <h3>{category.title}</h3>
+              <h3><strong>{category.title}</strong></h3>
               <p>{category.description}</p>
             </div>
           ))}
