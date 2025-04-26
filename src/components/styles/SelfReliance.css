@@ -73,6 +73,9 @@
   @media (max-width: 768px) {
     .self-reliance-table {
       flex-direction: column;
+      width: 80%;
+      margin:0 1rem;
+      padding: 0 1rem;
     }
     
     .table-column {
