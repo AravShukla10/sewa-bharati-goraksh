@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import EBulletin from './components/E-bulletin';
 import Home from './components/Home';
 import sevabahrati from './images/image.webp';
-
+import Education from './components/Education';
 function App() {
   const [languageType, setLanguageType] = useState('en');
   // activeScreen === 1 means show Home; any other value means non-home
@@ -43,6 +43,7 @@ function App() {
         languageType={languageType}
         setLanguageType={setLanguageType}
         onNavItemClick={handleNavChange}
+        setActiveScreen={setActiveScreen}
       />
       
       {showModal && (
@@ -72,8 +73,8 @@ function App() {
         </div>
       )}
       
-      {activeScreen === 1 && <Home languageType={languageType} />}
-      {activeScreen === 2 && <EBulletin languageType={languageType}/>}
+      {activeScreen === 1 && <Home languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 4 && <Education languageType={languageType} setActiveScreen={setActiveScreen}/>}
     </div>
   );
 }

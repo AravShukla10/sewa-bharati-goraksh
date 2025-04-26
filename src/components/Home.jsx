@@ -23,7 +23,7 @@ import adolscentdevelopment from '../images/adolscentdevelopment.webp';
 
 
 
-function Home({ languageType }) {
+function Home({ languageType , setActiveScreen}) {
   const imageArray1 = [img1, img2, img3, img4, img5];
   const imageArray2 = [img6, img7, img8, img9, img10];
 
@@ -71,14 +71,14 @@ const campaignImages = [
   return (
     <div className="home-container" id="hero-section">
       <HeroSection languageType={languageType} />
-
+      <ServiceMessage languageType={languageType} />
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }}  id="sector-section">
         {languageType === 'hi'
           ? 'सेवा भारती के प्रमुख आयाम'
           : 'Sewa Bharti Sectors'}
       </h2>
-      <SewaBhartiSections languageType={languageType} />
-      <ServiceMessage languageType={languageType} />
+      <SewaBhartiSections languageType={languageType} setActiveScreen={setActiveScreen} />
+      
 
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="activity-section">
         {languageType === 'hi'
