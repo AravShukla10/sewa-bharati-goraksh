@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import "./styles/Footer.css";
 
-export default function Footer({ languageType }) {
+export default function Footer({ languageType, setActiveScreen, activeScreen}) {
   const [email, setEmail] = useState("");
   const currentYear = new Date().getFullYear();
 
@@ -76,10 +76,10 @@ export default function Footer({ languageType }) {
             <h3 className="footer-heading">{texts.ourInitiatives}</h3>
             <ul className="footer-list">
               <li><a href="/"><span className="footer-list-dot" />{texts.childCare}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.education}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.health}</a></li>
+              <li> <a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(4);}}> <span className="footer-list-dot"/> {texts.education} </a> </li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(5);}}><span className="footer-list-dot" />{texts.health}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.empowerment}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.social}</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(7);}}><span className="footer-list-dot" />{texts.social}</a></li>
             </ul>
           </div>
 
@@ -102,16 +102,16 @@ export default function Footer({ languageType }) {
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
                 <p style={{ textAlign: 'justify' }}>
-  Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
+       Madhav Dham, Swami Dayananada Marg, 375 D Rajendra Nagar East, Gorakhpur-273015, U.P. (India)
 </p>
    </div>
               <div className="footer-contact-item">
                 <Phone className="footer-icon" />
-                <p>+2345340, +2345015, 0800005561</p>
+                <p> +91-9936161761, +91-7007159590</p>
               </div>
               <div className="footer-contact-item">
                 <Mail className="footer-icon" />
-                <a href="mailto:contact@sewabharti.org">contact@sewabharti.org</a>
+                <a href="mailto:sevabhartigorakshprant@gmail.com"> sevabhartigorakshprant@gmail.com</a>
               </div>
             </div>
 

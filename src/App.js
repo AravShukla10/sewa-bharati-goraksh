@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import SocialService from './components/SocialService';
 import HealthService from './components/HealthService';
 import SelfReliance from './components/SelfReliance';
+import ContactUs from './components/ContactUs';
 function App() {
   const [languageType, setLanguageType] = useState('en');
   // activeScreen === 1 means show Home; any other value means non-home
@@ -96,7 +97,8 @@ function App() {
       {activeScreen === 5 && <HealthService languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 6 && <SelfReliance languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 7 && <SocialService languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      <Footer languageType={languageType}/>
+      {activeScreen === 8 && <ContactUs languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen}/>
     </div>
   );
 }

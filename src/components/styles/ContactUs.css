@@ -1,0 +1,51 @@
+.contact-container {
+    margin-top: 80px;
+    padding: 30px 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-container h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #222;
+    text-align: center;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.5;
+}
+
+.inline-icon {
+    color: #007BFF;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 20px 15px;
+        margin-top: 70px;
+    }
+    
+    .contact-line {
+        flex-wrap: wrap;
+    }
+    
+    .inline-icon {
+        margin-right: 8px;
+    }
+}
