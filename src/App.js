@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+import EBulletin from './components/E-bulletin';
+import Donation from './components/Donation';
 import Home from './components/Home';
 import sevabahrati from './images/image.webp';
 import Education from './components/Education';
@@ -19,6 +21,17 @@ function App() {
   
   // Callback to handle nav item change from Navbar
   const handleNavChange = (screen) => {
+
+    if (screen === 2) {
+      setActiveScreen(2);
+      return;
+    }
+
+    if(screen ===3 ){
+      setActiveScreen(3);
+      return;
+    }
+
     if (screen !== 1) {
       setShowModal(true);
       // Start timer and save a reference
@@ -77,6 +90,8 @@ function App() {
       )}
       
       {activeScreen === 1 && <Home languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 2 && <EBulletin languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 3 && <Donation languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 4 && <Education languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 5 && <HealthService languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 6 && <SelfReliance languageType={languageType} setActiveScreen={setActiveScreen}/>}
