@@ -99,7 +99,7 @@ const campaignTexts = {
         content={content1}
         languageType={languageType}
       />
-     <p style={{ fontSize: '1.1rem', lineHeight: '1.6', textAlign: 'justify' ,margin:'1.1rem',  padding: '0 2rem' }}>{languageType === 'hi'?content3hi:content3en}</p>
+     <p style={{ fontSize: '1.1rem', lineHeight: '1.6', textAlign: 'justify' ,margin:'1.1rem',  padding: '0 1rem' }}>{languageType === 'hi'?content3hi:content3en}</p>
       <CarouselWithText
         images={hostelImages}
         position="right"
@@ -110,7 +110,7 @@ const campaignTexts = {
   fontSize: '1.1rem', 
   lineHeight: '1.6', 
   textAlign: 'justify', 
-  padding: '0 2rem' // <-- padding added here
+  padding: '0 1rem' // <-- padding added here
 }}>
   {languageType === 'hi' ? content4hi : content4en}
 </p>

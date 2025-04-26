@@ -62,6 +62,25 @@
   margin-bottom: 0;
 }
 
+/* Category listings in main content */
+.service-content p:nth-of-type(7),
+.service-content p:nth-of-type(8),
+.service-content p:nth-of-type(9) {
+  padding-left: 20px;
+  border-left: 3px solid #e67e22;
+  margin-left: 15px;
+  background-color: rgba(230, 126, 34, 0.07);
+  padding: 12px 20px;
+  border-radius: 6px;
+}
+
+.service-content strong {
+  color: #e67e22;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* Enhanced Category Styling */
 .service-categories {
   display: flex;
   justify-content: space-between;
@@ -71,28 +90,26 @@
 }
 
 .category {
-  padding: 20px;
-  border-radius: 10px;
+  padding: 30px;
+  border-radius: 12px;
   background-size: cover;
   background-position: center;
   color: white;
-  margin: 15px 0;
   position: relative;
   overflow: hidden;
   flex: 1;
   min-width: 280px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s ease;
   backdrop-filter: blur(2px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
-  
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .category::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
   z-index: 0;
 }
 
@@ -102,57 +119,94 @@
   position: relative;
   z-index: 1;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .category:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
 .category-icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-color: #e67e22;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin: 0 auto 1.5rem;
-  filter: brightness(1.2) contrast(1.5);
-  
+  margin: 0 auto 1.8rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .category h3 {
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+  border-bottom: 2px solid #e67e22;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.category h3 strong {
+  color: #fff;
+  font-weight: 700;
 }
 
 .category p {
-  font-size: 1rem;
-  line-height: 1.6;
-  text-align: justify;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  text-align: left;
 }
 
-
+/* Bold category numbers and improved category styling */
 .category-1 {
   background-image: url('../../images/15.webp');
-  opacity: 0.7;
+  border-top: 5px solid #e67e22;
 }
 
 .category-2 {
   background-image: url('../../images/16.webp');
-  opacity: 0.7;
+  border-top: 5px solid #e67e22;
 }
 
 .category-3 {
   background-image: url('../../images/17.webp');
-  opacity: 0.7;
+  border-top: 5px solid #e67e22;
+}
+
+/* Category number badge */
+.category-icon::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(230, 126, 34, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
 }
 
 @media (max-width: 992px) {
@@ -180,13 +234,14 @@
 
   .service-categories {
     flex-direction: column;
-    width: 90%;
+    gap: 2rem;
+    width: 100%;
+    margin: 2rem auto;
   }
 
   .category {
     width: 100%;
     min-width: 100%;
-    margin-bottom: 1.5rem;
   }
 }
 
@@ -198,9 +253,33 @@
   .service-content {
     padding: 1.5rem;
   }
+  
+  .category {
+    padding: 25px 20px;
+  }
+  
+  .category h3 {
+    font-size: 1.3rem;
+  }
 }
 
 /* For Hindi text */
 html[lang="hi"] .service-message {
   font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif;
+}
+
+/* Animation for categories */
+.category {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
