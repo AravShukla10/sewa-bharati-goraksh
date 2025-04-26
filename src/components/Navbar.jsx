@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Navbar.css';
 
-function Navbar({ languageType, setLanguageType, onNavItemClick }) {
+function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
@@ -48,17 +48,23 @@ function Navbar({ languageType, setLanguageType, onNavItemClick }) {
 
   const handleNavItemClick = (index) => {
     setActiveItem(index);
-    
-    // Handle scrollable sections
-    if (sectionScrollMap.hasOwnProperty(index)) {
-      scrollToSection(sectionScrollMap[index]);
+  
+    if (index === 0) {
+      setActiveScreen(1); 
+      if (isMobile) setIsMenuOpen(false);
       return;
     }
-    
-    // Default handling for other items
-    onNavItemClick(index === 0 ? 1 : index + 1);
+  
+    if (sectionScrollMap.hasOwnProperty(index)) {
+      scrollToSection(sectionScrollMap[index]);
+      if (isMobile) setIsMenuOpen(false);
+      return;
+    }
+  
+    onNavItemClick(index + 1);
     if (isMobile) setIsMenuOpen(false);
   };
+  
 
   const navItems = [
     { label: languageType === 'hi' ? 'होम' : 'Home' },
