@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import "./styles/Footer.css";
 
-export default function Footer({ languageType }) {
+export default function Footer({ languageType, setActiveScreen, activeScreen}) {
   const [email, setEmail] = useState("");
   const currentYear = new Date().getFullYear();
 
@@ -76,10 +76,10 @@ export default function Footer({ languageType }) {
             <h3 className="footer-heading">{texts.ourInitiatives}</h3>
             <ul className="footer-list">
               <li><a href="/"><span className="footer-list-dot" />{texts.childCare}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.education}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.health}</a></li>
+              <li> <a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(4);}}> <span className="footer-list-dot"/> {texts.education} </a> </li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(5);}}><span className="footer-list-dot" />{texts.health}</a></li>
               <li><a href="/"><span className="footer-list-dot" />{texts.empowerment}</a></li>
-              <li><a href="/"><span className="footer-list-dot" />{texts.social}</a></li>
+              <li><a href="#" onClick={(e) => {e.preventDefault(); setActiveScreen(7);}}><span className="footer-list-dot" />{texts.social}</a></li>
             </ul>
           </div>
 

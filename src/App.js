@@ -98,7 +98,7 @@ function App() {
       {activeScreen === 6 && <SelfReliance languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 7 && <SocialService languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 8 && <ContactUs languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      <Footer languageType={languageType}/>
+      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen}/>
     </div>
   );
 }
