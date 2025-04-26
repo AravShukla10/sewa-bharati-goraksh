@@ -54,6 +54,13 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
   
   const handleNavItemClick = async (index) => {
     setActiveItem(index);
+
+
+    if (index === 6) {
+      window.open('https://docs.google.com/forms/d/1n0THm9wrKArIKr6qJGhs32vDvBEcgqC6jeXvYqgfFEU/preview', '_blank'); 
+      if (isMobile) setIsMenuOpen(false);
+      return;
+    }
   
     if (index === 0) {
       await setActiveScreen(1);
