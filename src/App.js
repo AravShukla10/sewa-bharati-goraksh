@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
+import EBulletin from './components/E-bulletin';
 import Home from './components/Home';
 import sevabahrati from './images/image.webp';
 
@@ -72,6 +73,7 @@ function App() {
       )}
       
       {activeScreen === 1 && <Home languageType={languageType} />}
+      {activeScreen === 2 && <EBulletin languageType={languageType}/>}
     </div>
   );
 }

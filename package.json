@@ -9,8 +9,10 @@
     "@testing-library/user-event": "^13.5.0",
     "feather-icons": "^4.29.2",
     "lucide-react": "^0.488.0",
+    "pdfjs-dist": "^4.0.379",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-pdf": "^7.7.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
