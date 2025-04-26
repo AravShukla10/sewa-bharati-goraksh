@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Navbar.css';
 
-function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen }) {
+function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen, activeScreen}) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
@@ -9,7 +9,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen 
   
   const sectionScrollMap = {
     0: 'hero-section',
-    1: 'sector-section',   
+    1: 'about-section',   
     2: 'activity-section',  
     3: 'campaign-section',  
     7: 'contact-section'    
@@ -38,42 +38,48 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen 
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMenuOpen]);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = async (sectionId) => {
+    if (activeScreen !== 1) {
+      await setActiveScreen(1);
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+    
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+    
     if (isMobile) setIsMenuOpen(false);
   };
-
-  const handleNavItemClick = (index) => {
+  
+  const handleNavItemClick = async (index) => {
     setActiveItem(index);
   
     if (index === 0) {
-      setActiveScreen(1); 
+      await setActiveScreen(1);
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-
-    if(index === 5){
-      setActiveScreen(3); 
+  
+    if (index === 5) {
+      await setActiveScreen(3);
       if (isMobile) setIsMenuOpen(false);
       return;
     }
     
     if (index === 4) {
-      setActiveScreen(2); 
+      await setActiveScreen(2);
       if (isMobile) setIsMenuOpen(false);
       return;
     }
   
     if (sectionScrollMap.hasOwnProperty(index)) {
-      scrollToSection(sectionScrollMap[index]);
+      await scrollToSection(sectionScrollMap[index]);
       if (isMobile) setIsMenuOpen(false);
       return;
     }
   
-    onNavItemClick(index + 1);
+    await onNavItemClick(index + 1);
     if (isMobile) setIsMenuOpen(false);
   };
   
