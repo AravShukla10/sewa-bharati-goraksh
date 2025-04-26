@@ -6,6 +6,10 @@ import Donation from './components/Donation';
 import Home from './components/Home';
 import sevabahrati from './images/image.webp';
 import Education from './components/Education';
+import Footer from './components/Footer';
+import SocialService from './components/SocialService';
+import HealthService from './components/HealthService';
+import SelfReliance from './components/SelfReliance';
 function App() {
   const [languageType, setLanguageType] = useState('en');
   // activeScreen === 1 means show Home; any other value means non-home
@@ -89,7 +93,10 @@ function App() {
       {activeScreen === 2 && <EBulletin languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 3 && <Donation languageType={languageType} setActiveScreen={setActiveScreen}/>}
       {activeScreen === 4 && <Education languageType={languageType} setActiveScreen={setActiveScreen}/>}
-
+      {activeScreen === 5 && <HealthService languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 6 && <SelfReliance languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 7 && <SocialService languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      <Footer languageType={languageType}/>
     </div>
   );
 }
