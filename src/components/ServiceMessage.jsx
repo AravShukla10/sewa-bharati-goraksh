@@ -70,7 +70,7 @@ const ServiceMessage = ({ languageType }) => {
   };
 
   return (
-    <div className="service-message">
+    <div className="service-message" id="about-section">
       <div className="content-wrapper">
         <div className="heading-section">
           <h1>{content[languageType].heading}</h1>

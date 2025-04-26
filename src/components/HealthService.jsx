@@ -2,6 +2,14 @@ import React from 'react';
 import './styles/HealthService.css';
 import ImageCarousel from './Carousal';
 
+// Dynamically import all images from ../images/health
+const importAll = (r) => r.keys().map((key) => ({
+  src: r(key),
+  alt: key.replace('./', '').replace(/\..+$/, ''), // Clean file name for alt
+}));
+
+const carouselImages = importAll(require.context('../images/health', false, /\.(png|jpe?g|webp|svg)$/));
+
 const HealthService = ({ languageType, setActiveScreen }) => {
   const content = {
     hi: {
@@ -49,12 +57,6 @@ const HealthService = ({ languageType, setActiveScreen }) => {
   };
 
   const data = content[languageType];
-
-  const carouselImages = [
-    { src: 'https://picsum.photos/800/400?random=21', alt: 'Health 1' },
-    { src: 'https://picsum.photos/800/400?random=22', alt: 'Health 2' },
-    { src: 'https://picsum.photos/800/400?random=23', alt: 'Health 3' },
-  ];
 
   return (
     <div className="page-container">

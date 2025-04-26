@@ -2,6 +2,14 @@ import React from 'react';
 import './styles/SocialService.css';
 import ImageCarousel from './Carousal';
 
+// Dynamically import all images from ../images/social
+const importAll = (r) => r.keys().map((key) => ({
+  src: r(key),
+  alt: key.replace('./', '').replace(/\..+$/, ''), // Clean filename for alt
+}));
+
+const carouselImages = importAll(require.context('../images/social', false, /\.(png|jpe?g|webp|svg)$/));
+
 const SocialService = ({ languageType, setActiveScreen }) => {
   const content = {
     hi: {
@@ -70,12 +78,6 @@ const SocialService = ({ languageType, setActiveScreen }) => {
   };
 
   const data = content[languageType];
-
-  const carouselImages = [
-    { src: 'https://picsum.photos/800/400?random=41', alt: 'SocialService 1' },
-    { src: 'https://picsum.photos/800/400?random=42', alt: 'SocialService 2' },
-    { src: 'https://picsum.photos/800/400?random=43', alt: 'SocialService 3' },
-  ];
 
   return (
     <div className="page-container">

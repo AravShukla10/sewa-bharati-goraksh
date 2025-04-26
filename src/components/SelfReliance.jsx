@@ -2,6 +2,14 @@ import React from 'react';
 import './styles/SelfReliance.css';
 import ImageCarousel from './Carousal';
 
+// Dynamically import all images from ../images/selfreliance
+const importAll = (r) => r.keys().map((key) => ({
+  src: r(key),
+  alt: key.replace('./', '').replace(/\..+$/, ''), // Clean filename for alt
+}));
+
+const carouselImages = importAll(require.context('../images/selfreliance', false, /\.(png|jpe?g|webp|svg)$/));
+
 const SelfReliance = ({ languageType, setActiveScreen }) => {
   const content = {
     hi: {
@@ -49,12 +57,6 @@ const SelfReliance = ({ languageType, setActiveScreen }) => {
   };
 
   const data = content[languageType];
-
-  const carouselImages = [
-    { src: 'https://picsum.photos/800/400?random=31', alt: 'SelfReliance 1' },
-    { src: 'https://picsum.photos/800/400?random=32', alt: 'SelfReliance 2' },
-    { src: 'https://picsum.photos/800/400?random=33', alt: 'SelfReliance 3' },
-  ];
 
   return (
     <div className="page-container">

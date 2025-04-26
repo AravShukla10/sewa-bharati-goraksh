@@ -5,12 +5,14 @@ import CarouselWithText from './CarouselWithText';
 import ImageCarouselWithText from './ImageCarouselWithText';
 import Footer from './Footer';
 
-// Import images
-import img1 from '../images/1.webp';
-import img2 from '../images/2.webp';
-import img3 from '../images/3.webp';
-import img4 from '../images/4.webp';
-import img5 from '../images/5.webp';
+// Dynamically import all images for 1st carousel (education folder)
+const importEducationImages = (r) => r.keys().map((key) => ({ src: r(key), alt: key.split('/').pop() }));
+const carouselImages = importEducationImages(require.context('../images/education', false, /\.(png|jpe?g|webp)$/));
+
+// Dynamically import all balsanskar images for 2nd carousel
+const importAll = (r) => r.keys().map((key) => r(key));
+const imageArray1 = importAll(require.context('../images/balsanskar', false, /\.webp$/));
+
 const Education = ({ languageType, setActiveScreen }) => {
   const content = {
     hi: {
@@ -59,14 +61,6 @@ const Education = ({ languageType, setActiveScreen }) => {
 
   const data = content[languageType];
 
-  const carouselImages = [
-    { src: 'https://picsum.photos/800/400?random=11', alt: 'Education 1' },
-    { src: 'https://picsum.photos/800/400?random=12', alt: 'Education 2' },
-    { src: 'https://picsum.photos/800/400?random=13', alt: 'Education 3' },
-  ];
-  const imageArray1 = [img1, img2, img3, img4, img5];
-  
-
   const content1 = {
     en: {
       title: 'Bal Sanskar Kendra',
@@ -79,6 +73,7 @@ const Education = ({ languageType, setActiveScreen }) => {
         'सेवा बस्तियों में बाल संस्कार शिक्षण केन्द्रों का संचालन "खेल-खेल में सीखो" के उद्देश्य से किया जा रहा है। इन केन्द्रों पर ऐसे बच्चे रहते हैं जिनके माता-पिता मजदूरी करते हैं और उन्हें कूड़ेदानों से प्लास्टिक इकट्ठा करने या इधर-उधर भटकने के लिए भेजा जाता है। पर्याप्त संसाधनों और उचित मार्गदर्शन के अभाव में ये बच्चे आपराधिक गतिविधियों में शामिल हो सकते हैं। बाल संस्कार केन्द्र में इन बच्चों को संस्कारों के साथ शिक्षा दी जा रही है। ये छात्र खेल-खेल में अपने अध्ययन पाठ्यक्रम के बारे में सीखते हैं। प्रार्थना और योगासन भी प्रतिदिन करवाए जाते हैं। उन्हें स्वच्छता, स्वास्थ्य, समाज कल्याण और राष्ट्र भक्ति जैसी अच्छी सेवाओं के लिए सिखाया जाता है।',
     },
   };
+
   return (
     <div className="page-container">
       <div className="navbar-space"></div>
@@ -113,8 +108,8 @@ const Education = ({ languageType, setActiveScreen }) => {
             </div>
           ))}
         </div>
-
       </div>
+
       <CarouselWithText
         images={imageArray1}
         position="left"

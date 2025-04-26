@@ -9,7 +9,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
   
   const sectionScrollMap = {
     0: 'hero-section',
-    1: 'sector-section',   
+    1: 'about-section',   
     2: 'activity-section',  
     3: 'campaign-section',  
     7: 'contact-section'    
