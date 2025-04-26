@@ -54,6 +54,18 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen 
       if (isMobile) setIsMenuOpen(false);
       return;
     }
+
+    if(index === 5){
+      setActiveScreen(3); 
+      if (isMobile) setIsMenuOpen(false);
+      return;
+    }
+    
+    if (index === 4) {
+      setActiveScreen(2); 
+      if (isMobile) setIsMenuOpen(false);
+      return;
+    }
   
     if (sectionScrollMap.hasOwnProperty(index)) {
       scrollToSection(sectionScrollMap[index]);
