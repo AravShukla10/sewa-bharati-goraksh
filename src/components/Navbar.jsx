@@ -60,6 +60,12 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
       if (isMobile) setIsMenuOpen(false);
       return;
     }
+
+    if(index === 7){
+      await setActiveScreen(8);
+      if (isMobile) setIsMenuOpen(false);
+      return;
+    }
   
     if (index === 5) {
       await setActiveScreen(3);

@@ -102,16 +102,16 @@ export default function Footer({ languageType }) {
               <div className="footer-contact-item">
                 <MapPin className="footer-icon" />
                 <p style={{ textAlign: 'justify' }}>
-  Sewa Bharti Delhi, Bal Vihar Singh Marg, Geeta Vihar, Delhi (India)
+       Madhav Dham, Swami Dayananada Marg, 375 D Rajendra Nagar East, Gorakhpur-273015, U.P. (India)
 </p>
    </div>
               <div className="footer-contact-item">
                 <Phone className="footer-icon" />
-                <p>+2345340, +2345015, 0800005561</p>
+                <p> +91-9936161761, +91-7007159590</p>
               </div>
               <div className="footer-contact-item">
                 <Mail className="footer-icon" />
-                <a href="mailto:contact@sewabharti.org">contact@sewabharti.org</a>
+                <a href="mailto:sevabhartigorakshprant@gmail.com"> sevabhartigorakshprant@gmail.com</a>
               </div>
             </div>
 
