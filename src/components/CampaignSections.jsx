@@ -1,15 +1,15 @@
 import React from 'react';
 import './styles/SewaBhartiSections.css';
-import educationImg from '../images/11.webp';
+import adolescentimg from '../images/adolescent/WhatsApp Image 2025-04-27 at 21.32.11_9369e5fd.webp';
 import healthImg from '../images/12.webp';
-import selfRelianceImg from '../images/13.webp';
+import nutritionImg from '../images/nutrition/WhatsApp Image 2025-04-27 at 21.31.37_4a6361b5.webp';
 import socialImg from '../images/14.webp';
 import { useNavigate } from 'react-router-dom';
 
 const CampaignSections = ({ languageType }) => {
   const navigate = useNavigate(); // Hook for navigation
 
-  const sectorImages = [educationImg, healthImg, selfRelianceImg, socialImg];
+  const sectorImages = [adolescentimg, healthImg, nutritionImg,];
 
   const content = {
     en: [

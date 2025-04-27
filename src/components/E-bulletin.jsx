@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import './styles/E-bulletin.css';
 
-// PDF.js worker configuration
+// Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const EBulletin = ({ activeScreen, languageType = 'en' }) => {
@@ -62,14 +62,14 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
       next: 'अगला'
     }
   };
-  // Simple translator
-  const t = key => translations[languageType]?.[key] || key;
 
-  // List of bulletin PDFs
+  const t = (key) => translations[languageType]?.[key] || key;
+
+  // PDF list with public directory paths
   const pdfList = [
     {
       id: 1,
-      url: '/pp1.pdf',
+      url: process.env.PUBLIC_URL + '/pp1.pdf',
       title: {
         en: 'Seva Jagriti November 2024 Edition',
         hi: 'सेवा जागृति नवंबर 2024 अंक'
@@ -77,22 +77,22 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
     },
     {
       id: 2,
-      url: '/pp2.pdf',
+      url: process.env.PUBLIC_URL + '/pp2.pdf',
       title: {
         en: 'Seva Jagriti December 2024 Edition',
         hi: 'सेवा जागृति दिसंबर 2024 अंक'
       }
-    },
-    // ... baaki pdfs
+    }
   ];
+
   const getTitle = (pdf) => {
     if (typeof pdf.title === 'object') {
       return pdf.title[languageType] || pdf.title.en;
     }
     return pdf.title || '';
   };
-    
 
+  // State management
   const [pdfs] = useState(pdfList);
   const [currentPdfIndex, setCurrentPdfIndex] = useState(0);
   const [numPages, setNumPages] = useState(null);
@@ -104,7 +104,7 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
-  // Detect mobile view
+  // Mobile detection
   useEffect(() => {
     const updateMobile = () => {
       const mobile = window.innerWidth <= 768;
@@ -116,135 +116,184 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
     return () => window.removeEventListener('resize', updateMobile);
   }, []);
 
-  // Adjust zoom on fullscreen toggle
+  // Fullscreen handling
   useEffect(() => {
     setScale(isFullScreen ? 1 : 0.8);
   }, [isFullScreen]);
 
-  // Reset scroll on screen change
   useEffect(() => window.scrollTo(0, 0), [activeScreen]);
 
-  // Fullscreen handlers
   const toggleFullScreen = () => {
     const container = document.querySelector('.e-bulletin-pdf-container');
     if (!document.fullscreenElement) {
-      (container.requestFullscreen || container.webkitRequestFullscreen || container.msRequestFullscreen).call(container);
+      container.requestFullscreen?.();
     } else {
-      (document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen).call(document);
+      document.exitFullscreen?.();
     }
   };
+
   useEffect(() => {
     const handler = () => setIsFullScreen(!!document.fullscreenElement);
     document.addEventListener('fullscreenchange', handler);
-    document.addEventListener('webkitfullscreenchange', handler);
-    document.addEventListener('mozfullscreenchange', handler);
-    document.addEventListener('MSFullscreenChange', handler);
-    return () => {
-      document.removeEventListener('fullscreenchange', handler);
-      document.removeEventListener('webkitfullscreenchange', handler);
-      document.removeEventListener('mozfullscreenchange', handler);
-      document.removeEventListener('MSFullscreenChange', handler);
-    };
+    return () => document.removeEventListener('fullscreenchange', handler);
   }, []);
 
-  // PDF load success
+  // PDF handling
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
     setCurrentPage(1);
     setLoading(false);
   };
 
-  // Page navigation
+  // Navigation
   const step = isTwoPageView && !isMobile ? 2 : 1;
-  const goToPreviousPages = () => setCurrentPage(p => Math.max(p - step, 1));
-  const goToNextPages = () => setCurrentPage(p => Math.min(p + step, numPages));
+  const goToPreviousPages = () => setCurrentPage((p) => Math.max(p - step, 1));
+  const goToNextPages = () => setCurrentPage((p) => Math.min(p + step, numPages));
   const goToFirstPage = () => setCurrentPage(1);
   const goToLastPage = () => setCurrentPage(numPages);
-  const goToPage = n => n >= 1 && n <= numPages && setCurrentPage(n);
+  const goToPage = (n) => n >= 1 && n <= numPages && setCurrentPage(n);
 
-  // PDF selection
-  const selectPdf = i => {
+  const selectPdf = (i) => {
     setCurrentPdfIndex(i);
     setCurrentPage(1);
     setLoading(true);
     if (isMobile) setSidebarOpen(false);
   };
+
   const goToPreviousPdf = () => currentPdfIndex > 0 && selectPdf(currentPdfIndex - 1);
   const goToNextPdf = () => currentPdfIndex < pdfs.length - 1 && selectPdf(currentPdfIndex + 1);
 
-  // Toggle between one/two page view
   const toggleViewMode = () => {
     if (isMobile) return;
-    setIsTwoPageView(v => !v);
+    setIsTwoPageView((v) => !v);
     if (!isTwoPageView && currentPage % 2 === 0) setCurrentPage(currentPage - 1);
   };
 
   const currentPdfUrl = pdfs[currentPdfIndex]?.url;
   const currentPdfTitle = getTitle(pdfs[currentPdfIndex] || {});
 
+  // Page rendering
+  const renderPages = () => {
+    const pages = [];
+    const startPage = currentPage;
+    const endPage = isTwoPageView && !isMobile ? Math.min(currentPage + 1, numPages) : currentPage;
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <div key={`page-${i}`} className="e-bulletin-page">
+          <Page
+            pageNumber={i}
+            scale={scale}
+            width={isMobile ? window.innerWidth - 40 : null}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </div>
+      );
+    }
+    return pages;
+  };
+
   return (
     <div className="e-bulletin-container">
-      {/* Mobile sidebar toggle */}
-      <button className="e-bulletin-mobile-toggle" onClick={() => setSidebarOpen(o => !o)}>
+      {/* Mobile toggle */}
+      <button className="e-bulletin-mobile-toggle" onClick={() => setSidebarOpen((o) => !o)}>
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
         <span>{sidebarOpen ? t('close') : t('editions')}</span>
       </button>
 
       {/* Sidebar */}
-      <div className={`e-bulletin-sidebar ${sidebarOpen ? 'open' : ''}`}>        
+      <div className={`e-bulletin-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="e-bulletin-sidebar-header">
           <Folder size={20} />
           <h3>{t('editions')}</h3>
         </div>
         <div className="e-bulletin-sidebar-content">
           {pdfs.map((pdf, idx) => (
-            <div key={pdf.id} className={`e-bulletin-edition ${idx === currentPdfIndex ? 'active' : ''}`} onClick={() => selectPdf(idx)}>
+            <div
+              key={pdf.id}
+              className={`e-bulletin-edition ${idx === currentPdfIndex ? 'active' : ''}`}
+              onClick={() => selectPdf(idx)}
+            >
               <File size={16} />
               <div className="e-bulletin-edition-info">
                 <span className="e-bulletin-edition-title">{getTitle(pdf)}</span>
-                <span className="e-bulletin-edition-date">{pdf.date}</span>
               </div>
             </div>
           ))}
         </div>
         <div className="e-bulletin-sidebar-footer">
-          <button className="e-bulletin-btn" onClick={goToPreviousPdf} disabled={currentPdfIndex <= 0}>
+          <button
+            className="e-bulletin-btn"
+            onClick={goToPreviousPdf}
+            disabled={currentPdfIndex <= 0}
+          >
             <ArrowLeft size={16} />
             <span>{t('previousPDF')}</span>
           </button>
-          <button className="e-bulletin-btn" onClick={goToNextPdf} disabled={currentPdfIndex >= pdfs.length - 1}>
+          <button
+            className="e-bulletin-btn"
+            onClick={goToNextPdf}
+            disabled={currentPdfIndex >= pdfs.length - 1}
+          >
             <span>{t('nextPDF')}</span>
             <ArrowRight size={16} />
           </button>
         </div>
       </div>
 
-      {/* Content area */}
-      <div className={`e-bulletin-content ${isFullScreen ? 'fullscreen' : ''}`}>        
+      {/* Main content */}
+      <div className={`e-bulletin-content ${isFullScreen ? 'fullscreen' : ''}`}>
         {/* Toolbar */}
         <div className="e-bulletin-toolbar">
           <div className="e-bulletin-current-pdf">
-          <span>{currentPdfTitle || t('pdfViewer')}</span>
-
+            <span>{currentPdfTitle || t('pdfViewer')}</span>
           </div>
           <div className="e-bulletin-controls">
             {!isMobile && (
-              <button className="e-bulletin-btn" onClick={toggleViewMode} title={isTwoPageView ? t('singlePageView') : t('doublePageView')}>
+              <button
+                className="e-bulletin-btn"
+                onClick={toggleViewMode}
+                title={isTwoPageView ? t('singlePageView') : t('doublePageView')}
+              >
                 {isTwoPageView ? <FileText size={20} /> : <BookOpen size={20} />}
               </button>
             )}
             <div className="e-bulletin-zoom">
-              <button className="e-bulletin-btn" onClick={() => setScale(s => Math.max(s - 0.2, 0.5))} title={t('zoomOut')}><ZoomOut size={18} /></button>
-              <button className="e-bulletin-btn" onClick={() => setScale(0.8)} title={t('resetZoom')}><RotateCw size={18} /><span>{Math.round(scale * 100)}%</span></button>
-              <button className="e-bulletin-btn" onClick={() => setScale(s => Math.min(s + 0.2, 2.5))} title={t('zoomIn')}><ZoomIn size={18} /></button>
+              <button
+                className="e-bulletin-btn"
+                onClick={() => setScale((s) => Math.max(s - 0.2, 0.5))}
+                title={t('zoomOut')}
+              >
+                <ZoomOut size={18} />
+              </button>
+              <button
+                className="e-bulletin-btn"
+                onClick={() => setScale(0.8)}
+                title={t('resetZoom')}
+              >
+                <RotateCw size={18} />
+                <span>{Math.round(scale * 100)}%</span>
+              </button>
+              <button
+                className="e-bulletin-btn"
+                onClick={() => setScale((s) => Math.min(s + 0.2, 2.5))}
+                title={t('zoomIn')}
+              >
+                <ZoomIn size={18} />
+              </button>
             </div>
-            <button className="e-bulletin-btn e-bulletin-fullscreen-btn" onClick={toggleFullScreen} title={isFullScreen ? t('exitFullscreen') : t('enterFullscreen')}>
+            <button
+              className="e-bulletin-btn e-bulletin-fullscreen-btn"
+              onClick={toggleFullScreen}
+              title={isFullScreen ? t('exitFullscreen') : t('enterFullscreen')}
+            >
               {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
             </button>
           </div>
         </div>
 
-        {/* PDF document */}
+        {/* PDF Document */}
         <div className="e-bulletin-pdf-container">
           {currentPdfUrl ? (
             <Document
@@ -252,38 +301,59 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
               onLoadSuccess={onDocumentLoadSuccess}
               loading={<div className="e-bulletin-loading">{t('loadingPDF')}</div>}
               className="e-bulletin-document"
+              onLoadError={console.error}
             >
-              <div className={`e-bulletin-pages ${isTwoPageView && !isMobile ? 'two-page-view' : 'one-page-view'}`}>                
-                <div className="e-bulletin-page">
-                  <Page pageNumber={currentPage} scale={scale} renderTextLayer={false} renderAnnotationLayer={false} />
-                </div>
-                {isTwoPageView && !isMobile && currentPage + 1 <= numPages && (
-                  <div className="e-bulletin-page">
-                    <Page pageNumber={currentPage + 1} scale={scale} renderTextLayer={false} renderAnnotationLayer={false} />
-                  </div>
-                )}
+              <div className={`e-bulletin-pages ${isTwoPageView && !isMobile ? 'two-page-view' : 'one-page-view'}`}>
+                {renderPages()}
               </div>
             </Document>
           ) : !loading ? (
-            <div className="e-bulletin-no-pdf"><p>{t('noPDFs')}</p></div>
+            <div className="e-bulletin-no-pdf">
+              <p>{t('noPDFs')}</p>
+            </div>
           ) : null}
 
-          {/* Fullscreen navigation overlays */}
+          {/* Fullscreen navigation */}
           {isFullScreen && (
             <>
               <div className="e-bulletin-fullscreen-nav">
-                <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}><ChevronLeft size={24} /></button>
+                <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}>
+                  <ChevronLeft size={24} />
+                </button>
                 <div className="e-bulletin-page-info">
                   <span>{currentPage}</span>
-                  {isTwoPageView && !isMobile && currentPage + 1 <= numPages && (<><span>-</span><span>{currentPage + 1}</span></>)}
-                  <span> of </span><span>{numPages || '-'}</span>
+                  {isTwoPageView && !isMobile && currentPage + 1 <= numPages && (
+                    <>
+                      <span>-</span>
+                      <span>{currentPage + 1}</span>
+                    </>
+                  )}
+                  <span> of </span>
+                  <span>{numPages || '-'}</span>
                 </div>
-                <button className="e-bulletin-btn" onClick={goToNextPages} disabled={currentPage >= numPages}><ChevronRight size={24} /></button>
+                <button className="e-bulletin-btn" onClick={goToNextPages} disabled={currentPage >= numPages}>
+                  <ChevronRight size={24} />
+                </button>
               </div>
               <div className="e-bulletin-zoom fullscreen-zoom">
-                <button className="e-bulletin-btn" onClick={() => setScale(s => Math.max(s - 0.2, 0.5))} title={t('zoomOut')}><ZoomOut size={18} /></button>
-                <button className="e-bulletin-btn" onClick={() => setScale(0.8)} title={t('resetZoom')}><RotateCw size={18} /><span>{Math.round(scale * 100)}%</span></button>
-                <button className="e-bulletin-btn" onClick={() => setScale(s => Math.min(s + 0.2, 2.5))} title={t('zoomIn')}><ZoomIn size={18} /></button>
+                <button
+                  className="e-bulletin-btn"
+                  onClick={() => setScale((s) => Math.max(s - 0.2, 0.5))}
+                  title={t('zoomOut')}
+                >
+                  <ZoomOut size={18} />
+                </button>
+                <button className="e-bulletin-btn" onClick={() => setScale(0.8)} title={t('resetZoom')}>
+                  <RotateCw size={18} />
+                  <span>{Math.round(scale * 100)}%</span>
+                </button>
+                <button
+                  className="e-bulletin-btn"
+                  onClick={() => setScale((s) => Math.min(s + 0.2, 2.5))}
+                  title={t('zoomIn')}
+                >
+                  <ZoomIn size={18} />
+                </button>
               </div>
             </>
           )}
@@ -291,23 +361,56 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
 
         {/* Bottom navigation */}
         <div className="e-bulletin-bottom-nav">
-          <button className="e-bulletin-btn" onClick={goToFirstPage} disabled={currentPage <= 1}><ChevronLeft size={18} /><ChevronLeft size={18} style={{ marginLeft: '-8px' }} /></button>
-          <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}><ChevronLeft size={20} /><span>{t('prev')}</span></button>
+          <button className="e-bulletin-btn" onClick={goToFirstPage} disabled={currentPage <= 1}>
+            <ChevronLeft size={18} />
+            <ChevronLeft size={18} style={{ marginLeft: '-8px' }} />
+          </button>
+          <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}>
+            <ChevronLeft size={20} />
+            <span>{t('prev')}</span>
+          </button>
           <div className="e-bulletin-page-info">
             <span>{currentPage}</span>
-            {isTwoPageView && !isMobile && currentPage + 1 <= numPages && (<><span>-</span><span>{currentPage + 1}</span></>)}
-            <span> of </span><span>{numPages || '-'}</span>
+            {isTwoPageView && !isMobile && currentPage + 1 <= numPages && (
+              <>
+                <span>-</span>
+                <span>{currentPage + 1}</span>
+              </>
+            )}
+            <span> of </span>
+            <span>{numPages || '-'}</span>
           </div>
-          <button className="e-bulletin-btn" onClick={goToNextPages} disabled={currentPage >= numPages - (isTwoPageView && !isMobile ? 1 : 0)}><span>{t('next')}</span><ChevronRight size={20} /></button>
-          <button className="e-bulletin-btn" onClick={goToLastPage} disabled={currentPage >= numPages}><ChevronRight size={18} /><ChevronRight size={18} style={{ marginLeft: '-8px' }} /></button>
+          <button
+            className="e-bulletin-btn"
+            onClick={goToNextPages}
+            disabled={currentPage >= numPages - (isTwoPageView && !isMobile ? 1 : 0)}
+          >
+            <span>{t('next')}</span>
+            <ChevronRight size={20} />
+          </button>
+          <button className="e-bulletin-btn" onClick={goToLastPage} disabled={currentPage >= numPages}>
+            <ChevronRight size={18} />
+            <ChevronRight size={18} style={{ marginLeft: '-8px' }} />
+          </button>
         </div>
 
-        {/* Mobile page input nav */}
+        {/* Mobile navigation */}
         <div className="e-bulletin-mobile-nav">
-          <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}><ChevronLeft size={20} /></button>
-          <input type="number" min="1" max={numPages || 1} value={currentPage} onChange={e => goToPage(parseInt(e.target.value) || 1)} className="e-bulletin-page-input" />
+          <button className="e-bulletin-btn" onClick={goToPreviousPages} disabled={currentPage <= 1}>
+            <ChevronLeft size={20} />
+          </button>
+          <input
+            type="number"
+            min="1"
+            max={numPages || 1}
+            value={currentPage}
+            onChange={(e) => goToPage(parseInt(e.target.value) || 1)}
+            className="e-bulletin-page-input"
+          />
           <span>/ {numPages || '-'}</span>
-          <button className="e-bulletin-btn" onClick={goToNextPages} disabled={currentPage >= numPages}><ChevronRight size={20} /></button>
+          <button className="e-bulletin-btn" onClick={goToNextPages} disabled={currentPage >= numPages}>
+            <ChevronRight size={20} />
+          </button>
         </div>
       </div>
     </div>
