@@ -279,7 +279,7 @@ const EBulletin = () => {
         </div>
 
         <div className="e-bulletin-pdf-container">
-          {loading && <div className="e-bulletin-loading">Loading PDF...</div>}
+         
           
           {currentPdfUrl && (
             <Document

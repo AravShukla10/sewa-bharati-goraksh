@@ -183,7 +183,7 @@ const campaignTexts = {
         autoplaySpeed={4000}
       />
 
-      {/* <Footer /> optional */}
+    
     </div>
   );
 }
