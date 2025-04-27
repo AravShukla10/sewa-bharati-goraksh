@@ -1,5 +1,7 @@
-import React, { useState, useRef,useEffect, act } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
+
 import Navbar from './components/Navbar';
 import EBulletin from './components/E-bulletin';
 import Donation from './components/Donation';
@@ -11,111 +13,118 @@ import SocialService from './components/SocialService';
 import HealthService from './components/HealthService';
 import SelfReliance from './components/SelfReliance';
 import ContactUs from './components/ContactUs';
+
+function Modal({ languageType, closeModal }) {
+  return (
+    <div className="modal-overlay">
+      <div className="modal-container">
+        <div className="modal-header">
+          <img src={sevabahrati} alt="Sewa Bharti Logo" className="modal-logo" />
+          <h2 className="modal-title">
+            {languageType === 'hi' ? 'सेवा भारती गोरक्ष' : 'Sewa Bharti Goraksh'}
+          </h2>
+          <button className="modal-close-btn" onClick={closeModal}>
+            <span>×</span>
+          </button>
+        </div>
+        <div className="modal-body">
+          <p className="modal-message">
+            {languageType === 'hi'
+              ? 'यह पृष्ठ अभी निर्माणाधीन है, कृपया बाद में आएं'
+              : 'This page is under construction, stay tuned!'}
+          </p>
+          <button className="modal-action-btn" onClick={closeModal}>
+            {languageType === 'hi' ? 'बंद करें' : 'Close'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [languageType, setLanguageType] = useState('en');
-  // activeScreen === 1 means show Home; any other value means non-home
-  const [activeScreen, setActiveScreen] = useState(1);
-  // showModal state when we need to display the "under construction" message.
   const [showModal, setShowModal] = useState(false);
-  // Timer reference for the auto-close
   const modalTimerRef = useRef(null);
-  
-  // Callback to handle nav item change from Navbar
+  const navigate = useNavigate(); // To programmatically navigate
+
+  // Handle nav item clicks
   const handleNavChange = (screen) => {
-
-    if (screen === 2) {
-      setActiveScreen(2);
-      return;
-    }
-
-    if(screen ===3 ){
-      setActiveScreen(3);
-      return;
-    }
-
-    if (screen !== 1) {
-      setShowModal(true);
-      // Start timer and save a reference
-      modalTimerRef.current = setTimeout(() => {
-        setShowModal(false);
-        setActiveScreen(1);
-      }, 3000);
-    } else {
-      setActiveScreen(1);
+    switch (screen) {
+      case 1:
+        navigate('/');
+        break;
+      case 2:
+        navigate('/e-bulletin');
+        break;
+      case 3:
+        navigate('/donation');
+        break;
+      case 4:
+        navigate('/education');
+        break;
+      case 5:
+        navigate('/health-service');
+        break;
+      case 6:
+        navigate('/self-reliance');
+        break;
+      case 7:
+        navigate('/social-service');
+        break;
+      case 8:
+        navigate('/contact-us');  // Changed from '/contactUs' to '/contact-us'
+        break;
+      default:
+        setShowModal(true);
+        modalTimerRef.current = setTimeout(() => {
+          setShowModal(false);
+          navigate('/');
+        }, 3000);
     }
   };
-  
+
   const closeModal = () => {
     if (modalTimerRef.current) {
       clearTimeout(modalTimerRef.current);
       modalTimerRef.current = null;
     }
     setShowModal(false);
-    setActiveScreen(1);
+    navigate('/');
   };
-  useEffect(() => {
-    const handlePopState = (event) => {
-      if (activeScreen !== 1) {
-        event.preventDefault();
-        setActiveScreen(1);
-        window.history.pushState(null, "", window.location.href); 
-      }
-    };
-  
-    window.addEventListener('popstate', handlePopState);
-  
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [activeScreen]);
-  
+
   return (
     <div className="App">
       <Navbar
         languageType={languageType}
         setLanguageType={setLanguageType}
         onNavItemClick={handleNavChange}
-        setActiveScreen={setActiveScreen}
       />
-      
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-container">
-            <div className="modal-header">
-              <img src={sevabahrati} alt="Sewa Bharti Logo" className="modal-logo" />
-              <h2 className="modal-title">
-                {languageType === 'hi' ? 'सेवा भारती गोरक्ष' : 'Sewa Bharti Goraksh'}
-              </h2>
-              <button className="modal-close-btn" onClick={closeModal}>
-                <span>×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-             
-              <p className="modal-message">
-                {languageType === 'hi'
-                  ? 'यह पृष्ठ अभी निर्माणाधीन है, कृपया बाद में आएं'
-                  : 'This page is under construction, stay tuned!'}
-              </p>
-              <button className="modal-action-btn" onClick={closeModal}>
-                {languageType === 'hi' ? 'बंद करें' : 'Close'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {activeScreen === 1 && <Home languageType={languageType} activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 2 && <EBulletin languageType={languageType} activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 3 && <Donation languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 4 && <Education languageType={languageType}  activeScreen={activeScreen}setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 5 && <HealthService languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 6 && <SelfReliance languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 7 && <SocialService languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 8 && <ContactUs languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
-      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen}/>
+
+      {showModal && <Modal languageType={languageType} closeModal={closeModal} />}
+
+      <Routes>
+        <Route path="/" element={<Home languageType={languageType} />} />
+        <Route path="/ebulletin" element={<EBulletin languageType={languageType} />} />
+        <Route path="/donation" element={<Donation languageType={languageType} />} />
+        <Route path="/education" element={<Education languageType={languageType} />} />
+        <Route path="/health-service" element={<HealthService languageType={languageType} />} />
+        <Route path="/self-reliance" element={<SelfReliance languageType={languageType} />} />
+        <Route path="/social-service" element={<SocialService languageType={languageType} />} />
+        <Route path="/contact-us" element={<ContactUs languageType={languageType} />} />
+        {/* Redirect unknown routes to Home */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+
+      <Footer languageType={languageType} />
     </div>
   );
 }
 
-export default App;
+export default function WrappedApp() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}

@@ -5,7 +5,7 @@ import ServiceMessage from './ServiceMessage';
 import CarouselWithText from './CarouselWithText';
 import ImageCarouselWithText from './ImageCarouselWithText';
 import Footer from './Footer';
-
+import CampaignSections from './CampaignSections';
 // Static imports for campaign section
 import nutrition from '../images/nutrition.webp';
 import disastermanagment from '../images/disastermanagment.webp';
@@ -177,13 +177,10 @@ const campaignTexts = {
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="campaign-section">
         {languageType === 'hi' ? 'अभियान' : 'Campaign'}
       </h2>
-      <ImageCarouselWithText
-        images={campaignImages}
-        texts={campaignTexts[languageType]}
-        autoplaySpeed={4000}
-      />
+     
 
-    
+    <CampaignSections languageType={languageType} setActiveScreen={setActiveScreen} />
+
     </div>
   );
 }

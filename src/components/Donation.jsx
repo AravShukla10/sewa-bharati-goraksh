@@ -4,22 +4,7 @@ import qrImage from '../images/qr.png';
 
 const Donation = ({ languageType,setActiveScreen }) => {
   const topRef = useRef(null);
-  useEffect(() => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
   
-    const handleBackButton = (event) => {
-      event.preventDefault();
-      setActiveScreen(1);
-    };
-  
-    window.addEventListener('popstate', handleBackButton);
-  
-    return () => {
-      window.removeEventListener('popstate', handleBackButton);
-    };
-  }, []);
   
   const content = {
     en: {

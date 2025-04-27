@@ -10,13 +10,13 @@ const ContactUs = ({ languageType }) => {
       heading: "Contact Us",
       address: "Madhav Dham, Swami Dayananada Marg, 375 D Rajendra Nagar East, Gorakhpur-273015, U.P. (India)",
       phones: ["+91-9936161761", "+91-7007159590"],
-      email: "sevabhartigorakshprant@gmail.com"
+      email: "sewabharatigoraksh@gmail.com"
     },
     hi: {
       heading: "संपर्क करें",
       address: "माधव धाम, स्वामी दयानंद मार्ग, 375 डी राजेंद्र नगर पूर्व, गोरखपुर-273015, उ.प्र. (भारत)",
       phones: ["+91-9936161761", "+91-7007159590"],
-      email: "sevabhartigorakshprant@gmail.com"
+      email: "sewabharatigoraksh@gmail.com"
     }
   };
     
