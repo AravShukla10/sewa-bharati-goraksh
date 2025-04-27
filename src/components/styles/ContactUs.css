@@ -1,51 +1,133 @@
+/* ContactUs.css */
 .contact-container {
-    margin-top: 80px;
-    padding: 30px 20px;
+    background-color: #f8f9fa;
+    padding: 4rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 3rem 0;
+  }
+  
+  .contact-wrapper {
     max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.contact-container h2 {
-    font-size: 28px;
-    margin-bottom: 25px;
-    color: #222;
+    margin: 0 auto;
+  }
+  
+  .contact-heading {
+    font-size: 2.5rem;
+    color: #e67e22;
     text-align: center;
-}
-
-.contact-details {
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  
+  .contact-heading:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background-color: #e67e22;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+  
+  .contact-details {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
-
-.contact-line {
+    gap: 1.5rem;
+  }
+  
+  .contact-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    line-height: 1.5;
-}
-
-.inline-icon {
-    color: #007BFF;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 50px;
+    background-color: rgba(230, 126, 34, 0.1);
+    border-radius: 50%;
+    margin-right: 1rem;
     flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
+  }
+  
+  .contact-icon {
+    color: #e67e22;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .contact-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
     .contact-container {
-        padding: 20px 15px;
-        margin-top: 70px;
+      padding: 3rem 1.5rem;
+    }
+  
+    .contact-heading {
+      font-size: 2rem;
+    }
+  
+    .contact-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .icon-wrapper {
+      margin-right: 0;
+      margin-bottom: 0.75rem;
     }
     
-    .contact-line {
-        flex-wrap: wrap;
+    .contact-text {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  
+  /* RTL support for Hindi */
+  html[lang="hi"] .contact-item {
+    flex-direction: row-reverse;
+  }
+  
+  html[lang="hi"] .icon-wrapper {
+    margin-right: 0;
+    margin-left: 1rem;
+  }
+  
+  html[lang="hi"] .contact-text {
+    font-family: 'Hind', sans-serif;
+  }
+  
+  @media (max-width: 768px) {
+    html[lang="hi"] .contact-item {
+      flex-direction: column;
     }
     
-    .inline-icon {
-        margin-right: 8px;
+    html[lang="hi"] .icon-wrapper {
+      margin-left: 0;
     }
-}
+  }

@@ -110,7 +110,7 @@ const campaignTexts = {
   fontSize: '1.1rem', 
   lineHeight: '1.6', 
   textAlign: 'justify', 
-  padding: '0 1rem' // <-- padding added here
+  padding: '0 1rem' 
 }}>
   {languageType === 'hi' ? content4hi : content4en}
 </p>
