@@ -5,7 +5,7 @@ import ServiceMessage from './ServiceMessage';
 import CarouselWithText from './CarouselWithText';
 import ImageCarouselWithText from './ImageCarouselWithText';
 import Footer from './Footer';
-
+import CampaignSections from './CampaignSections';
 // Static imports for campaign section
 import nutrition from '../images/nutrition.webp';
 import disastermanagment from '../images/disastermanagment.webp';
@@ -23,7 +23,7 @@ const importAll = (r) =>
 const nanajiImages = importAll(require.context('../images/nanaji', false, /\.(png|jpe?g|webp|svg)$/));
 const hostelImages = importAll(require.context('../images/hostel', false, /\.(webp)$/));
 
-function Home({ languageType, setActiveScreen }) {
+function Home({ languageType }) {
   const [isMobile, setIsMobile] = useState(false);
   const [showFullContent3, setShowFullContent3] = useState(false);
   const [showFullContent4, setShowFullContent4] = useState(false);
@@ -104,7 +104,7 @@ const campaignTexts = {
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="sector-section">
         {languageType === 'hi' ? 'सेवा भारती के प्रमुख आयाम' : 'Sewa Bharti Sectors'}
       </h2>
-      <SewaBhartiSections languageType={languageType} setActiveScreen={setActiveScreen} />
+      <SewaBhartiSections languageType={languageType}  />
 
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="activity-section">
         {languageType === 'hi' ? 'सेवा भारती के कार्य' : 'Sewa Bharti Activities'}
@@ -177,13 +177,10 @@ const campaignTexts = {
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="campaign-section">
         {languageType === 'hi' ? 'अभियान' : 'Campaign'}
       </h2>
-      <ImageCarouselWithText
-        images={campaignImages}
-        texts={campaignTexts[languageType]}
-        autoplaySpeed={4000}
-      />
+     
 
-    
+    <CampaignSections languageType={languageType}  />
+
     </div>
   );
 }

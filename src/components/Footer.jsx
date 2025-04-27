@@ -111,7 +111,7 @@ export default function Footer({ languageType, setActiveScreen, activeScreen}) {
               </div>
               <div className="footer-contact-item">
                 <Mail className="footer-icon" />
-                <a href="mailto:sevabhartigorakshprant@gmail.com"> sevabhartigorakshprant@gmail.com</a>
+                <a href="mailto:sevabhartigorakshprant@gmail.com"> sewabharatigoraksh@gmail.com</a>
               </div>
             </div>
 
