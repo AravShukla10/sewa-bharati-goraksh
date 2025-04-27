@@ -21,7 +21,7 @@ const importAll = (r) =>
     }));
 
 const nanajiImages = importAll(require.context('../images/nanaji', false, /\.(png|jpe?g|webp|svg)$/));
-const hostelImages = importAll(require.context('../images/hostel', false, /\.(png|jpe?g|webp|svg)$/));
+const hostelImages = importAll(require.context('../images/hostel', false, /\.(webp)$/));
 
 function Home({ languageType, setActiveScreen }) {
   const [isMobile, setIsMobile] = useState(false);
