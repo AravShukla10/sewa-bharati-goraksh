@@ -53,7 +53,22 @@ function App() {
     setShowModal(false);
     setActiveScreen(1);
   };
-
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (activeScreen !== 1) {
+        event.preventDefault();
+        setActiveScreen(1);
+        window.history.pushState(null, "", window.location.href); 
+      }
+    };
+  
+    window.addEventListener('popstate', handlePopState);
+  
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [activeScreen]);
+  
   return (
     <div className="App">
       <Navbar
