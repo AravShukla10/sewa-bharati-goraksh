@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect,useState}from 'react';
 import HeroSection from './HeroSection';
 import SewaBhartiSections from './SewaBhartiSections';
 import ServiceMessage from './ServiceMessage';
@@ -24,6 +24,22 @@ const nanajiImages = importAll(require.context('../images/nanaji', false, /\.(pn
 const hostelImages = importAll(require.context('../images/hostel', false, /\.(png|jpe?g|webp|svg)$/));
 
 function Home({ languageType, setActiveScreen }) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [showFullContent3, setShowFullContent3] = useState(false);
+  const [showFullContent4, setShowFullContent4] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize(); // Check once on mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleContent3 = () => setShowFullContent3(prev => !prev);
+  const toggleContent4 = () => setShowFullContent4(prev => !prev);
+
   const content1 = {
     en: {
       title: 'Nanaji Deshmukh Training Institute',
@@ -99,21 +115,64 @@ const campaignTexts = {
         content={content1}
         languageType={languageType}
       />
-     <p style={{ fontSize: '1.1rem', lineHeight: '1.6', textAlign: 'justify' ,margin:'1.1rem',  padding: '0 1rem' }}>{languageType === 'hi'?content3hi:content3en}</p>
+      <div style={{ fontSize: '1.1rem', lineHeight: '1.6', textAlign: 'justify', margin: '1.1rem', padding: '0 1rem' }}>
+        {isMobile && !showFullContent3 ? (
+          <>
+            {(languageType === 'hi' ? content3hi.slice(0, 50) : content3en.slice(0, 50))}...
+            <span
+              onClick={toggleContent3}
+              style={{ color: '#007bff', cursor: 'pointer', marginLeft: '5px', fontWeight: 500 }}
+            >
+              {languageType === 'hi' ? 'और पढ़ें' : 'Read More'}
+            </span>
+          </>
+        ) : (
+          <>
+            {languageType === 'hi' ? content3hi : content3en}
+            {isMobile && (
+              <span
+                onClick={toggleContent3}
+                style={{ color: '#007bff', cursor: 'pointer', marginLeft: '5px', fontWeight: 500 }}
+              >
+                {languageType === 'hi' ? 'कम दिखाएं' : 'Read Less'}
+              </span>
+            )}
+          </>
+        )}
+      </div>
+  
       <CarouselWithText
         images={hostelImages}
         position="right"
         content={content2}
         languageType={languageType}
       />
-     <p style={{ 
-  fontSize: '1.1rem', 
-  lineHeight: '1.6', 
-  textAlign: 'justify', 
-  padding: '0 1rem' 
-}}>
-  {languageType === 'hi' ? content4hi : content4en}
-</p>
+      <div style={{ fontSize: '1.1rem', lineHeight: '1.6', textAlign: 'justify', padding: '0 1rem' }}>
+        {isMobile && !showFullContent4 ? (
+          <>
+            {(languageType === 'hi' ? content4hi.slice(0, 50) : content4en.slice(0, 50))}...
+            <span
+              onClick={toggleContent4}
+              style={{ color: '#007bff', cursor: 'pointer', marginLeft: '5px', fontWeight: 500 }}
+            >
+              {languageType === 'hi' ? 'और पढ़ें' : 'Read More'}
+            </span>
+          </>
+        ) : (
+          <>
+            {languageType === 'hi' ? content4hi : content4en}
+            {isMobile && (
+              <span
+                onClick={toggleContent4}
+                style={{ color: '#007bff', cursor: 'pointer', marginLeft: '5px', fontWeight: 500 }}
+              >
+                {languageType === 'hi' ? 'कम दिखाएं' : 'Read Less'}
+              </span>
+            )}
+          </>
+        )}
+      </div>
+
 
       <h2 style={{ textAlign: 'center', marginTop: '2rem', fontSize: '2rem' }} id="campaign-section">
         {languageType === 'hi' ? 'अभियान' : 'Campaign'}
