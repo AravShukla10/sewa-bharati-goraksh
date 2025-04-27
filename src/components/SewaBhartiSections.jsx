@@ -25,7 +25,7 @@ const SewaBhartiSections = ({ languageType, setActiveScreen }) => {
   };
 
   const handleSectorClick = (index) => {
-    setActiveScreen(index + 4); // 4 for Education, 5 for Health, 6 for Self-Reliance, 7 for Social
+    setActiveScreen(index + 4); 
   };
 
   return (

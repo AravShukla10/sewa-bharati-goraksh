@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import './styles/ContactUs.css';
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const ContactUs = ({ languageType }) => {
+  const topRef = useRef(null);
+
   const content = {
     en: {
       heading: "Contact Us",
@@ -19,9 +21,15 @@ const ContactUs = ({ languageType }) => {
   };
     
   const currentContent = languageType === 'hi' ? content.hi : content.en;
+
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
   
   return (
-    <div className="contact-container" id="contact-section">
+    <div className="contact-container" id="contact-section" ref={topRef}>
       <div className="contact-wrapper">
         <h2 className="contact-heading">{currentContent.heading}</h2>
             

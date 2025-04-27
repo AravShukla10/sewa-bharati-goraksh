@@ -1,149 +1,400 @@
+/* ==========================================================================
+   E-bulletin.css — main stylesheet for PDF viewer
+   ========================================================================== */
+
+/* ------------------------------ Base Layout ------------------------------ */
 .e-bulletin-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    box-sizing: border-box;
-    width: 100%;
-}
-
-.e-bulletin-container h2 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #222;
-    font-weight: 700;
-}
-
-.pdf-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Changed from center to flex-start */
-    background: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 20px;
-    box-sizing: border-box;
-    margin: 0 auto;
-    min-height: auto; /* Changed from fixed height to auto */
-}
-
-.pdf-viewer {
-    width: 100%;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    max-height: calc(100vh - 100px); /* Dynamic height based on viewport */
-    min-height: 700px;
-}
-
-/* Arrow buttons */
-.arrow-button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    border: 2px solid #007BFF;
-    border-radius: 50%;
-    background-color: white;
-    color: #007BFF;
-    font-size: 24px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
-}
-
-.arrow-button:hover {
-    background-color: #007BFF;
-    color: white;
-    transform: translateY(-50%) scale(1.1);
-}
-
-.arrow-left {
-    left: 10px;
-}
-
-.arrow-right {
-    right: 10px;
-}
-
-.page-info {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-}
-
-.pdf-loading,
-.pdf-error {
-    font-size: 18px;
-    color: #888;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.pdf-error button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.pdf-error button:hover {
-    background-color: #c82333;
-}
-
-.controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    top: 60px;    /* leave room for navbar */
+    left: 0; right: 0; bottom: 0;
     width: 100%;
-    max-width: 1000px;
-    margin-bottom: 15px;
-}
-
-.zoom-controls {
+    background: #f5f5f5;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+  
+  /* ----------------------------- Sidebar Panel ----------------------------- */
+  .e-bulletin-sidebar {
+    width: 280px;
+    background: #2c3e50;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    height: 100%;
+  }
+  .e-bulletin-sidebar-header {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.zoom-controls button {
-    padding: 5px 10px;
-    background-color: #007BFF;
-    color: white;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .e-bulletin-sidebar-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .e-bulletin-sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .e-bulletin-edition {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .e-bulletin-edition:hover { background: rgba(255,255,255,0.1); }
+  .e-bulletin-edition.active {
+    background: rgba(255,255,255,0.15);
+    border-left: 4px solid #3498db;
+  }
+  .e-bulletin-edition-title { font-weight: 500; font-size: 14px; }
+  .e-bulletin-edition-date  { font-size: 12px; opacity: 0.7; }
+  
+  .e-bulletin-sidebar-footer {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .e-bulletin-sidebar-footer .e-bulletin-btn {
+    flex: 1; font-size: 12px; padding: 8px;
+  }
+  
+  /* ----------------------------- Content Area ------------------------------ */
+  .e-bulletin-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* PDF viewer container */
+  .e-bulletin-pdf-container {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    background: #e0e0e0;
+  }
+  
+  /* Pages layout */
+  .e-bulletin-pages {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    min-height: 100%;
+  }
+  .e-bulletin-pages.one-page-view { gap: 0; }
+  .e-bulletin-pages.two-page-view { gap: 20px; }
+  
+  .e-bulletin-page {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Loading & empty states */
+  .e-bulletin-loading,
+  .e-bulletin-no-pdf {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    z-index: 15;
+  }
+  .e-bulletin-loading {
+    padding: 16px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .e-bulletin-no-pdf p { color: #777; }
+  
+  /* ------------------------------ Toolbar ---------------------------------- */
+  .e-bulletin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #34495e;
+    color: #fff;
+    position: relative;  /* for mobile adjustments */
+    z-index: 10;
+  }
+  .e-bulletin-current-pdf {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .e-bulletin-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .e-bulletin-zoom {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  /* ------------------------ Fullscreen Navigation -------------------------- */
+  .e-bulletin-content.fullscreen {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: #000;
+    z-index: 9999;
+  }
+  .e-bulletin-fullscreen-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 20px;
+    border-radius: 50px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .e-bulletin-fullscreen-nav:hover { opacity: 1; }
+  
+  /* Floating zoom in fullscreen (desktop) */
+  .fullscreen-zoom {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 10001;
+  }
+  
+  /* ---------------------------- Buttons ------------------------------------ */
+  .e-bulletin-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.1);
     border: none;
     border-radius: 4px;
+    color: #fff;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.zoom-controls button:hover {
-    background-color: #0056b3;
-}
-
-.zoom-controls button:disabled {
-    background-color: #cccccc;
+    transition: all 0.2s;
+  }
+  .e-bulletin-btn:hover  { background: rgba(255,255,255,0.2); }
+  .e-bulletin-btn:active { transform: translateY(1px); }
+  .e-bulletin-btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
-}
-
-.zoom-controls span {
-    min-width: 50px;
+  }
+  
+  /* Page-info text */
+  .e-bulletin-page-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 8px;
+  }
+  
+  /* Mobile page-nav (hidden by default) */
+  .e-bulletin-mobile-nav {
+    display: none;
+    padding: 10px;
+    background: #34495e;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .e-bulletin-page-input {
+    width: 60px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     text-align: center;
-    font-weight: 600;
-}
+  }
+  
+  /* Mobile sidebar toggle button */
+  .e-bulletin-mobile-toggle {
+    display: none;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* --------------------------- Responsive ---------------------------------- */
+  @media (max-width: 992px) {
+    .e-bulletin-sidebar { width: 240px; }
+  }
+  
+  @media (max-width: 768px) {
+    /* Sidebar slides in/out */
+    .e-bulletin-sidebar {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 260px;
+      transform: translateX(-100%);
+      z-index: 50;
+    }
+    .e-bulletin-sidebar.open { transform: translateX(0); }
+  
+    /* Show mobile toggle & nav */
+    .e-bulletin-mobile-toggle { display: flex; }
+    .e-bulletin-mobile-nav    { display: flex; }
+    .e-bulletin-bottom-nav    { display: none; }
+  
+    /* Force single-page view on mobile */
+    .e-bulletin-pages,
+    .e-bulletin-pages.two-page-view {
+      flex-direction: column;
+      gap: 0;
+      padding-bottom: 60px;
+    }
+    .e-bulletin-page + .e-bulletin-page { display: none; }
+  
+    /* Toolbar adjustments */
+    .e-bulletin-toolbar { padding-top: 48px; }
+  
+    /* Center PDF title, pin fullscreen button */
+    .e-bulletin-current-pdf {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      white-space: nowrap;
+    }
+    .e-bulletin-fullscreen-btn {
+      position: absolute;
+      top: 50%; right: 16px;
+      transform: translateY(-50%);
+      display: flex;
+    }
+  
+    /* Show controls except zoom */
+    .e-bulletin-controls {
+      display: flex !important;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+    .e-bulletin-controls .e-bulletin-zoom {
+      display: none !important;
+    }
+    .e-bulletin-bottom-nav
+    {
+        display: none !important;
+    }
+  }
+/* ── Desktop/fullscreen navigation buttons ── */
+/* make fullscreen-nav buttons large, circular, centered */
+.e-bulletin-fullscreen-nav .e-bulletin-btn {
+    width: 48px;              /* square hit-area */
+    height: 48px;
+    justify-content: center;  /* center the icon */
+    padding: 0;               /* remove extra padding */
+    border-radius: 50%;       /* round */
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+  }
+  .e-bulletin-fullscreen-nav .e-bulletin-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+
+.e-bulletin-fullscreen-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: rgba(0,0,0,0.6);
+    padding: 10px 20px;
+    border-radius: 50px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .e-bulletin-fullscreen-nav:hover {
+    opacity: 1;
+  }
+  .e-bulletin-fullscreen-nav .e-bulletin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+  }
+  .e-bulletin-fullscreen-nav .e-bulletin-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  
+  /* ── Bottom desktop nav (below PDF) ── */
+  .e-bulletin-bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #34495e;
+    color: white;
+    z-index: 10;
+    gap: 8px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .e-bulletin-bottom-nav .e-bulletin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 4px;
+    background-color: rgba(255,255,255,0.1);
+  }
+  .e-bulletin-bottom-nav .e-bulletin-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  
+  /* ── Fullscreen toggle button in toolbar ── */
+  .e-bulletin-fullscreen-btn {
+    margin-left: 8px;
+    display: flex;
+  }
+  
+    

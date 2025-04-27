@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect, act } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import EBulletin from './components/E-bulletin';
@@ -53,7 +53,7 @@ function App() {
     setShowModal(false);
     setActiveScreen(1);
   };
-  
+
   return (
     <div className="App">
       <Navbar
@@ -90,14 +90,14 @@ function App() {
         </div>
       )}
       
-      {activeScreen === 1 && <Home languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 2 && <EBulletin languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 3 && <Donation languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 4 && <Education languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 5 && <HealthService languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 6 && <SelfReliance languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 7 && <SocialService languageType={languageType} setActiveScreen={setActiveScreen}/>}
-      {activeScreen === 8 && <ContactUs languageType={languageType} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 1 && <Home languageType={languageType} activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 2 && <EBulletin languageType={languageType} activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 3 && <Donation languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 4 && <Education languageType={languageType}  activeScreen={activeScreen}setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 5 && <HealthService languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 6 && <SelfReliance languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 7 && <SocialService languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
+      {activeScreen === 8 && <ContactUs languageType={languageType}  activeScreen={activeScreen} setActiveScreen={setActiveScreen}/>}
       <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen}/>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './styles/SocialService.css';
 import ImageCarousel from './Carousal';
 
@@ -11,6 +11,14 @@ const importAll = (r) => r.keys().map((key) => ({
 const carouselImages = importAll(require.context('../images/social', false, /\.(png|jpe?g|webp|svg)$/));
 
 const SocialService = ({ languageType, setActiveScreen }) => {
+  const pageTopRef = useRef(null);
+
+  useEffect(() => {
+    if (pageTopRef.current) {
+      pageTopRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   const content = {
     hi: {
       mainHeading: 'सामाजिक सेवा',
@@ -80,7 +88,7 @@ const SocialService = ({ languageType, setActiveScreen }) => {
   const data = content[languageType];
 
   return (
-    <div className="page-container">
+    <div className="page-container" ref={pageTopRef}>
       <div className="navbar-space"></div>
 
       <div className="top-bar">
