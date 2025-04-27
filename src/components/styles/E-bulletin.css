@@ -318,6 +318,12 @@
         display: none !important;
     }
   }
+  .e-bulletin-edition-info
+  {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 /* ── Desktop/fullscreen navigation buttons ── */
 /* make fullscreen-nav buttons large, circular, centered */
 .e-bulletin-fullscreen-nav .e-bulletin-btn {

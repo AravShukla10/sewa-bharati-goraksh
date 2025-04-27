@@ -2,9 +2,25 @@ import React, { useEffect, useRef } from 'react';
 import './styles/Donation.css'; 
 import qrImage from '../images/qr.png'; 
 
-const Donation = ({ languageType }) => {
+const Donation = ({ languageType,setActiveScreen }) => {
   const topRef = useRef(null);
-
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      setActiveScreen(1);
+    };
+  
+    window.addEventListener('popstate', handleBackButton);
+  
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
+  
   const content = {
     en: {
       heading: "Support Us with Your Donation",
