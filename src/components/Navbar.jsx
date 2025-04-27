@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Navbar.css';
+import HeroSection from './HeroSection';
 
 function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen, activeScreen}) {
   const [isMobile, setIsMobile] = useState(false);
@@ -54,21 +55,29 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
   
   const handleNavItemClick = async (index) => {
     setActiveItem(index);
-
-
+  
     if (index === 6) {
       window.open('https://docs.google.com/forms/d/1n0THm9wrKArIKr6qJGhs32vDvBEcgqC6jeXvYqgfFEU/preview', '_blank'); 
       if (isMobile) setIsMenuOpen(false);
       return;
     }
   
-    if (index === 0) {
-      await setActiveScreen(1);
+    if (index === 0) {  
+      if (activeScreen === 1) {
+        
+        scrollToSection('hero-section');
+      } else {
+        await setActiveScreen(1);
+        setTimeout(() => {
+          scrollToSection('hero-section');
+        }, 300); 
+      }
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-
-    if(index === 7){
+    
+  
+    if (index === 7) {
       await setActiveScreen(8);
       if (isMobile) setIsMenuOpen(false);
       return;
@@ -79,7 +88,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-    
+  
     if (index === 4) {
       await setActiveScreen(2);
       if (isMobile) setIsMenuOpen(false);
@@ -95,6 +104,7 @@ function Navbar({ languageType, setLanguageType, onNavItemClick,setActiveScreen,
     await onNavItemClick(index + 1);
     if (isMobile) setIsMenuOpen(false);
   };
+  
   
 
   const navItems = [
