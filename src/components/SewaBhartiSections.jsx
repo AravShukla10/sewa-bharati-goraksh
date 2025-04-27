@@ -31,21 +31,27 @@ const SewaBhartiSections = ({ languageType }) => {
   };
 
   return (
-    <div className="sewa-bharti-sectors">
-      {content[languageType].map((sector, index) => (
-        <div key={index} className="sector" onClick={() => handleSectorClick(sector.route)}>
-          <div className="sector__image-wrapper">
-            <img 
-              src={sectorImages[index]} 
-              alt={sector.heading} 
-              className="sector__image"
-            />
-          </div>
-          <h3>{sector.heading}</h3>
-          <p>{sector.description}</p>
-        </div>
-      ))}
+<div className="sewa-bharti-sectors">
+  {content[languageType].map((sector, index) => (
+    <div
+      key={index}
+      className="sector"
+      onClick={() => handleSectorClick(sector.route)}
+      style={{ cursor: 'pointer' }}
+    >
+      <div className="sector__image-wrapper">
+        <img 
+          src={sectorImages[index]} 
+          alt={sector.heading} 
+          className="sector__image"
+        />
+      </div>
+      <h3>{sector.heading}</h3>
+      <p>{sector.description}</p>
     </div>
+  ))}
+</div>
+
   );
 };
 

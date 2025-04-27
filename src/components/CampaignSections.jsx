@@ -31,7 +31,7 @@ const CampaignSections = ({ languageType }) => {
   return (
     <div className="sewa-bharti-sectors">
       {content[languageType].map((sector, index) => (
-        <div key={index} className="sector" onClick={() => handleSectorClick(sector.route)}>
+        <div key={index} className="sector" onClick={() => handleSectorClick(sector.route)} style={{ cursor: 'pointer' }}>
           <div className="sector__image-wrapper">
             <img 
               src={sectorImages[index]} 
