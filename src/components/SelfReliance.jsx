@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './styles/SelfReliance.css';
 import ImageCarousel from './Carousal';
 
@@ -10,7 +10,10 @@ const importAll = (r) => r.keys().map((key) => ({
 
 const carouselImages = importAll(require.context('../images/selfreliance', false, /\.(png|jpe?g|webp|svg)$/));
 
-const SelfReliance = ({ languageType, setActiveScreen }) => {
+const SelfReliance = ({ languageType, setActiveScreen, activeScreen }) => {
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
+
   const content = {
     hi: {
       mainHeading: 'स्वावलंबन सेवा',
@@ -58,12 +61,21 @@ const SelfReliance = ({ languageType, setActiveScreen }) => {
 
   const data = content[languageType];
 
+  useEffect(() => {
+    if (activeScreen === 6) { // Assuming 6 is the screen number for SelfReliance
+      containerRef.current?.scrollTo(0, 0);
+      headingRef.current?.focus();
+    }
+  }, [activeScreen]);
+
   return (
-    <div className="page-container">
+    <div className="page-container" ref={containerRef}>
       <div className="navbar-space"></div>
 
       <div className="top-bar">
-        <h1 className="main-heading">{data.mainHeading}</h1>
+        <h1 className="main-heading" ref={headingRef} tabIndex={-1}>
+          {data.mainHeading}
+        </h1>
         <button className="back-button" onClick={() => setActiveScreen(1)}>
           {data.backButton}
         </button>

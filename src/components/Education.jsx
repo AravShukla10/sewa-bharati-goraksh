@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/Education.css';
 import ImageCarousel from './Carousal';
 import CarouselWithText from './CarouselWithText';
@@ -13,7 +13,25 @@ const carouselImages = importEducationImages(require.context('../images/educatio
 const importAll = (r) => r.keys().map((key) => r(key));
 const imageArray1 = importAll(require.context('../images/balsanskar', false, /\.webp$/));
 
-const Education = ({ languageType, setActiveScreen }) => {
+const Education = ({ languageType, setActiveScreen, activeScreen }) => {
+  // ref for scrolling the container div
+  const containerRef = useRef(null);
+  // ref for heading to move keyboard focus
+  const headingRef = useRef(null);
+
+  useEffect(() => {
+    // scroll the container to top when screen changes
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    } else {
+      window.scrollTo(0, 0);
+    }
+    // move keyboard focus to the heading for accessibility
+    if (headingRef.current) {
+      headingRef.current.focus();
+    }
+  }, [activeScreen]);
+
   const content = {
     hi: {
       mainHeading: 'शिक्षा',
@@ -75,11 +93,13 @@ const Education = ({ languageType, setActiveScreen }) => {
   };
 
   return (
-    <div className="page-container">
+    <div className="page-container" ref={containerRef}>
       <div className="navbar-space"></div>
 
       <div className="top-bar">
-        <h1 className="main-heading">{data.mainHeading}</h1>
+        <h1 className="main-heading" ref={headingRef} tabIndex={-1}>
+          {data.mainHeading}
+        </h1>
         <button className="back-button" onClick={() => setActiveScreen(1)}>
           {data.backButton}
         </button>
@@ -116,6 +136,8 @@ const Education = ({ languageType, setActiveScreen }) => {
         content={content1}
         languageType={languageType}
       />
+
+      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen} />
     </div>
   );
 };

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './styles/Donation.css'; 
 import qrImage from '../images/qr.png'; 
 
 const Donation = ({ languageType }) => {
+  const topRef = useRef(null);
+
   const content = {
     en: {
       heading: "Support Us with Your Donation",
@@ -18,8 +20,14 @@ const Donation = ({ languageType }) => {
 
   const currentContent = languageType === 'hi' ? content.hi : content.en;
 
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
-    <div className="donation-container">
+    <div className="donation-container" ref={topRef}>
       <h2>{currentContent.heading}</h2>
       <p>{currentContent.description}</p>
       <div className="qr-image-wrapper">

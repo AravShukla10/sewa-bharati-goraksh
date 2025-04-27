@@ -6,7 +6,7 @@ import './styles/E-bulletin.css';
 // Set the pdf.js worker source
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-const EBulletin = () => {
+const EBulletin = ({activeScreen}) => {
   // Hardcoded PDF list
   const pdfList = [
     {
@@ -62,7 +62,9 @@ const EBulletin = () => {
     }
   }, [isFullScreen]);
   
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeScreen]);
   // Handle fullscreen mode
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
