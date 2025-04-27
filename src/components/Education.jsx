@@ -137,7 +137,6 @@ const Education = ({ languageType, setActiveScreen, activeScreen }) => {
         languageType={languageType}
       />
 
-      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen} />
     </div>
   );
 };
