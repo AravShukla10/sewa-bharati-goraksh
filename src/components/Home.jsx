@@ -3,10 +3,7 @@ import HeroSection from './HeroSection';
 import SewaBhartiSections from './SewaBhartiSections';
 import ServiceMessage from './ServiceMessage';
 import CarouselWithText from './CarouselWithText';
-import ImageCarouselWithText from './ImageCarouselWithText';
-import Footer from './Footer';
 import CampaignSections from './CampaignSections';
-// Static imports for campaign section
 import nutrition from '../images/nutrition.webp';
 import disastermanagment from '../images/disastermanagment.webp';
 import adolscentdevelopment from '../images/adolscentdevelopment.webp';

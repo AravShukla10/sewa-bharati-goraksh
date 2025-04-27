@@ -134,7 +134,7 @@ const Education = ({ languageType }) => {
         languageType={languageType}
       />
 
-      <Footer languageType={languageType} />
+  
     </div>
   );
 };
