@@ -14,6 +14,7 @@ import HealthService from './components/HealthService';
 import SelfReliance from './components/SelfReliance';
 import ContactUs from './components/ContactUs';
 import Disaster from './components/Disaster-management';
+
 function Modal({ languageType, closeModal }) {
   return (
     <div className="modal-overlay">
