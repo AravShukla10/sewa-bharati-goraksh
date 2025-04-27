@@ -14,6 +14,8 @@ import HealthService from './components/HealthService';
 import SelfReliance from './components/SelfReliance';
 import ContactUs from './components/ContactUs';
 import Disaster from './components/Disaster-management';
+import Adolescent from './components/Adolescent-development';
+import Nutrition from './components/Proper-nutrition';
 function Modal({ languageType, closeModal }) {
   return (
     <div className="modal-overlay">
@@ -78,6 +80,12 @@ function App() {
       case 9:
         navigate('/disaster-management');  
         break;
+      case 10:
+        navigate("/adolescent-management");
+        break;
+      case 11:
+        navigate("/proper-nutrition");
+        break;
       default:
         setShowModal(true);
         modalTimerRef.current = setTimeout(() => {
@@ -116,6 +124,8 @@ function App() {
         <Route path="/social-service" element={<SocialService languageType={languageType} />} />
         <Route path="/contact-us" element={<ContactUs languageType={languageType} />} />
          <Route path="/disaster-management" element={<Disaster languageType={languageType} />} />
+         <Route path='/adolescent-development' element={<Adolescent languageType={languageType}/>}/>
+         <Route path='/proper-nutrition' element={<Nutrition languageType={languageType}/>}/>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
