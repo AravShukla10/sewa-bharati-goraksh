@@ -13,7 +13,7 @@ import SocialService from './components/SocialService';
 import HealthService from './components/HealthService';
 import SelfReliance from './components/SelfReliance';
 import ContactUs from './components/ContactUs';
-
+import Disaster from './components/Disaster-management';
 function Modal({ languageType, closeModal }) {
   return (
     <div className="modal-overlay">
@@ -73,7 +73,10 @@ function App() {
         navigate('/social-service');
         break;
       case 8:
-        navigate('/contact-us');  // Changed from '/contactUs' to '/contact-us'
+        navigate('/contact-us');  
+        break;
+      case 9:
+        navigate('/disaster-management');  
         break;
       default:
         setShowModal(true);
@@ -112,7 +115,7 @@ function App() {
         <Route path="/self-reliance" element={<SelfReliance languageType={languageType} />} />
         <Route path="/social-service" element={<SocialService languageType={languageType} />} />
         <Route path="/contact-us" element={<ContactUs languageType={languageType} />} />
-         
+         <Route path="/disaster-management" element={<Disaster languageType={languageType} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
