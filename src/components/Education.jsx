@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // For page navigation
 import './styles/Education.css';
 import ImageCarousel from './Carousal';
 import CarouselWithText from './CarouselWithText';
-import ImageCarouselWithText from './ImageCarouselWithText';
 import Footer from './Footer';
 
 // Dynamically import all images for 1st carousel (education folder)
@@ -13,24 +13,21 @@ const carouselImages = importEducationImages(require.context('../images/educatio
 const importAll = (r) => r.keys().map((key) => r(key));
 const imageArray1 = importAll(require.context('../images/balsanskar', false, /\.webp$/));
 
-const Education = ({ languageType, setActiveScreen, activeScreen }) => {
-  // ref for scrolling the container div
+const Education = ({ languageType }) => {
+  const navigate = useNavigate(); // Hook to handle navigation
   const containerRef = useRef(null);
-  // ref for heading to move keyboard focus
   const headingRef = useRef(null);
 
   useEffect(() => {
-    // scroll the container to top when screen changes
     if (containerRef.current) {
       containerRef.current.scrollTop = 0;
     } else {
       window.scrollTo(0, 0);
     }
-    // move keyboard focus to the heading for accessibility
     if (headingRef.current) {
       headingRef.current.focus();
     }
-  }, [activeScreen]);
+  }, []);
 
   const content = {
     hi: {
@@ -100,7 +97,7 @@ const Education = ({ languageType, setActiveScreen, activeScreen }) => {
         <h1 className="main-heading" ref={headingRef} tabIndex={-1}>
           {data.mainHeading}
         </h1>
-        <button className="back-button" onClick={() => setActiveScreen(1)}>
+        <button className="back-button" onClick={() => navigate('/')}>
           {data.backButton}
         </button>
       </div>
@@ -137,7 +134,7 @@ const Education = ({ languageType, setActiveScreen, activeScreen }) => {
         languageType={languageType}
       />
 
-      <Footer languageType={languageType} setActiveScreen={setActiveScreen} activeScreen={activeScreen} />
+      <Footer languageType={languageType} />
     </div>
   );
 };

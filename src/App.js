@@ -46,7 +46,7 @@ function App() {
   const [languageType, setLanguageType] = useState('en');
   const [showModal, setShowModal] = useState(false);
   const modalTimerRef = useRef(null);
-  const navigate = useNavigate(); // To programmatically navigate
+  const navigate = useNavigate(); 
 
   // Handle nav item clicks
   const handleNavChange = (screen) => {
@@ -112,7 +112,7 @@ function App() {
         <Route path="/self-reliance" element={<SelfReliance languageType={languageType} />} />
         <Route path="/social-service" element={<SocialService languageType={languageType} />} />
         <Route path="/contact-us" element={<ContactUs languageType={languageType} />} />
-        {/* Redirect unknown routes to Home */}
+         
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 

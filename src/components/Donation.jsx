@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './styles/Donation.css'; 
 import qrImage from '../images/qr.png'; 
 
-const Donation = ({ languageType,setActiveScreen }) => {
+const Donation = ({ languageType}) => {
   const topRef = useRef(null);
   
   
