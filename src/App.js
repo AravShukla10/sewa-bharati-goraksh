@@ -116,7 +116,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home languageType={languageType} />} />
-        <Route path="/ebulletin" element={<EBulletin languageType={languageType} />} />
+        <Route path="/e-bulletin" element={<EBulletin languageType={languageType} />} />
         <Route path="/donation" element={<Donation languageType={languageType} />} />
         <Route path="/education" element={<Education languageType={languageType} />} />
         <Route path="/health-service" element={<HealthService languageType={languageType} />} />
