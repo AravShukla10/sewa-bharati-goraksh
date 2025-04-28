@@ -47,7 +47,7 @@ const SewaBhartiSections = ({ languageType }) => {
         />
       </div>
       <h3>{sector.heading}</h3>
-      <p>{sector.description}</p>
+      <p style={{textAlign:'justify'}}>{sector.description}</p>
     </div>
   ))}
 </div>

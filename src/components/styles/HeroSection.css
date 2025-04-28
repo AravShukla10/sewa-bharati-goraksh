@@ -125,14 +125,15 @@
   }
 
   .hs-text-content {
-    padding: 20px 15px;
+    padding: 20px 5px;
     text-align: center;
   }
-
+  
   .hs-content-wrapper {
-    padding: 0 10px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0;
   }
-
   .hs-title {
     font-size: 1.6rem;
   }
