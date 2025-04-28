@@ -4,13 +4,13 @@ import './styles/Navbar.css';
 import HeroSection from './HeroSection';
 
 function Navbar({ languageType, setLanguageType }) {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState(0);
+  const [isMobile, setIsMobile] = useState(false); // Detect mobile view
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
+  const [activeItem, setActiveItem] = useState(0); // Active nav item
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Map route paths to their corresponding indices
+  // Mapping route paths to nav indices
   const routeMap = {
     '/': 0,
     '/about': 1,
@@ -22,21 +22,23 @@ function Navbar({ languageType, setLanguageType }) {
     '/contact': 7
   };
 
-  // Update active item based on current route
+  // Set active item based on current route
   useEffect(() => {
     const path = location.pathname;
     const index = Object.entries(routeMap).find(([route]) => path.startsWith(route))?.[1] || 0;
     setActiveItem(index);
   }, [location.pathname]);
 
+  // Section IDs for in-page scrolling
   const sectionScrollMap = {
     0: 'hero-section',
-    1: 'about-section',   
-    2: 'activity-section',  
-    3: 'campaign-section',  
-    7: 'contact-section'    
+    1: 'about-section',
+    2: 'activity-section',
+    3: 'campaign-section',
+    7: 'contact-section'
   };
 
+  // Handle window resizing for mobile view
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
@@ -49,6 +51,7 @@ function Navbar({ languageType, setLanguageType }) {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
+  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMenuOpen && !event.target.closest('.navbar')) {
@@ -60,6 +63,7 @@ function Navbar({ languageType, setLanguageType }) {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMenuOpen]);
 
+  // Scroll smoothly to a section
   const scrollToSection = async (sectionId) => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -74,46 +78,49 @@ function Navbar({ languageType, setLanguageType }) {
     if (isMobile) setIsMenuOpen(false);
   };
   
+  // Handle navigation clicks
   const handleNavItemClick = async (index) => {
     setActiveItem(index);
-  
+
+    // Handle special cases like Join Us (external), Contact, Donate, etc.
     if (index === 6) {
-      window.open('https://docs.google.com/forms/d/1n0THm9wrKArIKr6qJGhs32vDvBEcgqC6jeXvYqgfFEU/preview', '_blank'); 
+      window.open('https://docs.google.com/forms/d/1n0THm9wrKArIKr6qJGhs32vDvBEcgqC6jeXvYqgfFEU/preview', '_blank');
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-  
-    if (index === 0) {  
+
+    if (index === 0) {
       if (location.pathname === '/') {
         scrollToSection('hero-section');
       } else {
         navigate('/');
         setTimeout(() => {
           scrollToSection('hero-section');
-        }, 300); 
+        }, 300);
       }
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-    
+
     if (index === 7) {
       navigate('/contact-us');
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-  
+
     if (index === 5) {
       navigate('/donation');
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-  
+
     if (index === 4) {
       navigate('/ebulletin');
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-  
+
+    // Scroll to section if defined
     if (sectionScrollMap.hasOwnProperty(index)) {
       if (location.pathname !== '/') {
         navigate('/');
@@ -122,16 +129,17 @@ function Navbar({ languageType, setLanguageType }) {
       if (isMobile) setIsMenuOpen(false);
       return;
     }
-  
-    // Handle other routes
+
+    // Default navigation based on routeMap
     const route = Object.entries(routeMap).find(([_, i]) => i === index)?.[0];
     if (route) {
       navigate(route);
     }
-    
+
     if (isMobile) setIsMenuOpen(false);
   };
 
+  // Navigation items with language switching
   const navItems = [
     { label: languageType === 'hi' ? 'होम' : 'Home' },
     { label: languageType === 'hi' ? 'हमारे बारे में' : 'About Us' },
@@ -147,11 +155,13 @@ function Navbar({ languageType, setLanguageType }) {
 
   return (
     <nav className="navbar">
+      {/* Logo */}
       <div className="navbar__logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <img src={require('../images/image.webp')} alt="Logo" />
         <span>Sewa Bharti Goraksh</span>
       </div>
 
+      {/* Navigation Menu */}
       <ul className={`navbar__menu ${isMenuOpen || !isMobile ? 'show' : ''}`}>
         {navItems.map((item, i) => (
           <li className="navbar__item" key={i}>
@@ -169,6 +179,7 @@ function Navbar({ languageType, setLanguageType }) {
         ))}
       </ul>
 
+      {/* Language Toggle */}
       <button
         className="lang-toggle"
         onClick={() => setLanguageType(languageType === 'en' ? 'hi' : 'en')}
@@ -178,6 +189,7 @@ function Navbar({ languageType, setLanguageType }) {
         <span className={languageType === 'en' ? 'active' : ''}>A</span>
       </button>
 
+      {/* Hamburger Menu for Mobile */}
       {isMobile && (
         <div className="hamburger" onClick={(e) => { e.stopPropagation(); toggleMenu(); }}>
           <div className="hamburger-icon">

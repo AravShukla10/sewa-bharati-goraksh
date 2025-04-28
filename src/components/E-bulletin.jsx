@@ -66,6 +66,7 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
   const t = (key) => translations[languageType]?.[key] || key;
 
   // PDF list with public directory paths
+  //can add more pdfs from here by making objects for it below -------------=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   const pdfList = [
     {
       id: 1,
