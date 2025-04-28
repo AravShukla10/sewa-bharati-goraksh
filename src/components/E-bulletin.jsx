@@ -80,8 +80,8 @@ const EBulletin = ({ activeScreen, languageType = 'en' }) => {
       id: 2,
       url: process.env.PUBLIC_URL + '/pp2.pdf',
       title: {
-        en: 'Seva Jagriti December 2024 Edition',
-        hi: 'सेवा जागृति दिसंबर 2024 अंक'
+        en: 'Seva Jagriti March 2025 Edition',
+        hi: 'सेवा जागृति मार्च 2025 अंक'
       }
     }
   ];

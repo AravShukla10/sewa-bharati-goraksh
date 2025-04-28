@@ -33,7 +33,7 @@ function Navbar({ languageType, setLanguageType }) {
   const sectionScrollMap = {
     0: 'hero-section',
     1: 'about-section',
-    2: 'activity-section',
+    2: 'sector-section',
     3: 'campaign-section',
     7: 'contact-section'
   };
