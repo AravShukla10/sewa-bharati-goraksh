@@ -66,7 +66,7 @@ const Education = ({ languageType }) => {
         {
           title: 'Educational Service Projects',
           lists: [
-            ['Kindergarten/Pre-school', 'Primary Education (up to Class 4)', 'Secondary Education (Classes 5 to 8)', 'Higher Education Centers', 'Residential Schools', 'Study Centers', 'Tuition/Coaching Centers'],
+            ['Kindergarden/Pre-school', 'Primary Education (up to Class 4)', 'Secondary Education (Classes 5 to 8)', 'Higher Education Centers', 'Residential Schools', 'Study Centers', 'Tuition/Coaching Centers'],
             ['Child Value Education Centers', 'Sanskrit Education', 'Vedic Education', 'Library/Reading Room', 'Mobile Science Laboratory', 'Single-Teacher Schools', 'Schools for the Differently-Abled'],
           ],
         },
