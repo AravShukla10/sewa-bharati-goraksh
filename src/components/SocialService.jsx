@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './styles/SocialService.css';
 import ImageCarousel from './Carousal';
+import { useNavigate } from 'react-router-dom'; // For page navigation
 
 // Dynamically import all images from ../images/social
 const importAll = (r) => r.keys().map((key) => ({
@@ -10,9 +11,9 @@ const importAll = (r) => r.keys().map((key) => ({
 
 const carouselImages = importAll(require.context('../images/social', false, /\.(png|jpe?g|webp|svg)$/));
 
-const SocialService = ({ languageType, setActiveScreen }) => {
+const SocialService = ({ languageType}) => {
   const pageTopRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (pageTopRef.current) {
       pageTopRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -93,7 +94,7 @@ const SocialService = ({ languageType, setActiveScreen }) => {
 
       <div className="top-bar">
         <h1 className="main-heading">{data.mainHeading}</h1>
-        <button className="back-button" onClick={() => setActiveScreen(1)}>
+        <button className="back-button" onClick={() => navigate('/')}>
           {data.backButton}
         </button>
       </div>

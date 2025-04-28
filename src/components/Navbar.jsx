@@ -115,7 +115,7 @@ function Navbar({ languageType, setLanguageType }) {
     }
 
     if (index === 4) {
-      navigate('/ebulletin');
+      navigate('/e-bulletin');
       if (isMobile) setIsMenuOpen(false);
       return;
     }

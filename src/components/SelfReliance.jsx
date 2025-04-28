@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './styles/SelfReliance.css';
 import ImageCarousel from './Carousal';
-
+import { useNavigate } from 'react-router-dom'; // For page navigation
 // Dynamically import all images from ../images/selfreliance
 const importAll = (r) => r.keys().map((key) => ({
   src: r(key),
@@ -10,10 +10,11 @@ const importAll = (r) => r.keys().map((key) => ({
 
 const carouselImages = importAll(require.context('../images/selfreliance', false, /\.(png|jpe?g|webp|svg)$/));
 
-const SelfReliance = ({ languageType, setActiveScreen, activeScreen }) => {
-  const containerRef = useRef(null);
-  const headingRef = useRef(null);
+const SelfReliance = ({ languageType,}) => {
 
+ 
+  const topRef = useRef(null); // Ref for the top of the page
+  const navigate = useNavigate(); // Hook to handle navigation
   const content = {
     hi: {
       mainHeading: 'स्वावलंबन सेवा',
@@ -61,22 +62,21 @@ const SelfReliance = ({ languageType, setActiveScreen, activeScreen }) => {
 
   const data = content[languageType];
 
-  useEffect(() => {
-    if (activeScreen === 6) { // Assuming 6 is the screen number for SelfReliance
-      containerRef.current?.scrollTo(0, 0);
-      headingRef.current?.focus();
+ useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [activeScreen]);
+  }, []);
 
   return (
-    <div className="page-container" ref={containerRef}>
+    <div className="page-container" ref={topRef}>
       <div className="navbar-space"></div>
 
       <div className="top-bar">
-        <h1 className="main-heading" ref={headingRef} tabIndex={-1}>
+        <h1 className="main-heading"  tabIndex={-1}>
           {data.mainHeading}
         </h1>
-        <button className="back-button" onClick={() => setActiveScreen(1)}>
+        <button className="back-button" onClick={() => navigate('/')}>
           {data.backButton}
         </button>
       </div>

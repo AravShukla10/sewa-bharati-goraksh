@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './styles/HealthService.css';
 import ImageCarousel from './Carousal';
-
+import { useNavigate } from 'react-router-dom'; // For page navigation
 // Dynamically import all images from ../images/health
 const importAll = (r) => r.keys().map((key) => ({
   src: r(key),
@@ -10,12 +10,12 @@ const importAll = (r) => r.keys().map((key) => ({
 
 const carouselImages = importAll(require.context('../images/health', false, /\.(png|jpe?g|webp|svg)$/));
 
-const HealthService = ({ languageType, setActiveScreen, activeScreen }) => {
+const HealthService = ({ languageType, activeScreen }) => {
   // ref for scrolling the container div
   const containerRef = useRef(null);
   // ref for heading to move keyboard focus
   const headingRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     // scroll the container to top when screen changes
     if (containerRef.current) {
@@ -84,7 +84,7 @@ const HealthService = ({ languageType, setActiveScreen, activeScreen }) => {
         <h1 className="main-heading" ref={headingRef} tabIndex={-1}>
           {data.mainHeading}
         </h1>
-        <button className="back-button" onClick={() => setActiveScreen(1)}>
+        <button className="back-button" onClick={() => navigate('/')}>
           {data.backButton}
         </button>
       </div>
