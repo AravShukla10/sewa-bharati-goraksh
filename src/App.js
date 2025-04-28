@@ -48,44 +48,43 @@ function App() {
   const [languageType, setLanguageType] = useState('en');
   const [showModal, setShowModal] = useState(false);
   const modalTimerRef = useRef(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
-  // Save the path whenever navigation happens
+  // Handle nav item clicks
   const handleNavChange = (screen) => {
-    let path = '/';
     switch (screen) {
       case 1:
-        path = '/';
+        navigate('/');
         break;
       case 2:
-        path = '/e-bulletin';
+        navigate('/e-bulletin');
         break;
       case 3:
-        path = '/donation';
+        navigate('/donation');
         break;
       case 4:
-        path = '/education';
+        navigate('/education');
         break;
       case 5:
-        path = '/health-service';
+        navigate('/health-service');
         break;
       case 6:
-        path = '/self-reliance';
+        navigate('/self-reliance');
         break;
       case 7:
-        path = '/social-service';
+        navigate('/social-service');
         break;
       case 8:
-        path = '/contact-us';
+        navigate('/contact-us');  
         break;
       case 9:
-        path = '/disaster-management';
+        navigate('/disaster-management');  
         break;
       case 10:
-        path = '/adolescent-development';
+        navigate("/adolescent-management");
         break;
       case 11:
-        path = '/proper-nutrition';
+        navigate("/proper-nutrition");
         break;
       default:
         setShowModal(true);
@@ -93,11 +92,7 @@ function App() {
           setShowModal(false);
           navigate('/');
         }, 3000);
-        return;
     }
-    
-    localStorage.setItem('lastVisitedPath', path);
-    navigate(path);
   };
 
   const closeModal = () => {
@@ -108,16 +103,6 @@ function App() {
     setShowModal(false);
     navigate('/');
   };
-
-  useEffect(() => {
-    const lastPath = localStorage.getItem('lastVisitedPath');
-    if (lastPath && lastPath !== '/') {
-      navigate('/');
-      setTimeout(() => {
-        navigate(lastPath);
-      }, 500); 
-    }
-  }, [navigate]);
 
   return (
     <div className="App">
@@ -131,16 +116,16 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home languageType={languageType} />} />
-        <Route path="/e-bulletin" element={<EBulletin languageType={languageType} />} />
+        <Route path="/ebulletin" element={<EBulletin languageType={languageType} />} />
         <Route path="/donation" element={<Donation languageType={languageType} />} />
         <Route path="/education" element={<Education languageType={languageType} />} />
         <Route path="/health-service" element={<HealthService languageType={languageType} />} />
         <Route path="/self-reliance" element={<SelfReliance languageType={languageType} />} />
         <Route path="/social-service" element={<SocialService languageType={languageType} />} />
         <Route path="/contact-us" element={<ContactUs languageType={languageType} />} />
-        <Route path="/disaster-management" element={<Disaster languageType={languageType} />} />
-        <Route path="/adolescent-development" element={<Adolescent languageType={languageType} />} />
-        <Route path="/proper-nutrition" element={<Nutrition languageType={languageType} />} />
+         <Route path="/disaster-management" element={<Disaster languageType={languageType} />} />
+         <Route path='/adolescent-development' element={<Adolescent languageType={languageType}/>}/>
+         <Route path='/proper-nutrition' element={<Nutrition languageType={languageType}/>}/>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
