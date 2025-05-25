@@ -248,7 +248,6 @@
 .footer-bottom {
   background-color:  #0A3153;
   padding: 1.5rem;
-  /* Remove any bottom margin and padding */
   margin: 0; /* Changed from margin-bottom to remove all margins */
   padding-bottom: 1.5rem;
   /* Ensure it's flush with the bottom */

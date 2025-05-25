@@ -146,7 +146,7 @@ export default function Footer({ languageType, setActiveScreen}) {
       <div className="footer-credit">
         <p>
           {texts.developedByPre}
-          <a href="mailto:bludgers52@gmail.com" style={{ textDecoration: "underline", color: "white" }}>
+          <a href="https://bludgers.vercel.app/" style={{ textDecoration: "underline", color: "white" }}>
             Bludgers
           </a>
           {texts.developedByPost}
